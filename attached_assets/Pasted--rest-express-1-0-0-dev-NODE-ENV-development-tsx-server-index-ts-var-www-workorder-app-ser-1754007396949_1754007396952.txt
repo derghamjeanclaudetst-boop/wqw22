@@ -1,0 +1,113 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+/var/www/workorder-app/server/db.ts:9
+  throw new Error(
+        ^
+
+
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+    at <anonymous> (/var/www/workorder-app/server/db.ts:9:9)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8
+root@srv773741:/var/www/workorder-app# ^[[200~cat > server/db.ts << 'EOF'
+> import { drizzle } from "drizzle-orm/node-postgres";
+> import { Pool } from "pg";
+> import * as schema from "../shared/schema.js";
+> 
+> if (!process.env.DATABASE_URL) {
+>   throw new Error(
+>     "DATABASE_URL must be set. Did you forget to provision a database?",
+>   );
+> }
+> 
+> export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+> export const db = drizzle(pool, { schema });
+> EOF~
+> 
+> # Connect to PostgreSQL and drop existing problematic tables
+sudo -u postgres psql workorder_db -c "
+DROP TABLE IF EXISTS work_orders CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS roles CASCADE;
+DROP SEQUENCE IF EXISTS roles_id_seq CASCADE;
+DROP SEQUENCE IF EXISTS users_id_seq CASCADE;
+DROP SEQUENCE IF EXISTS work_orders_id_seq CASCADE;
+"
+> sudo -u postgres psql workorder_db << 'EOF'
+-- Create roles table
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    description TEXT,
+    permissions JSONB DEFAULT '[]'::jsonb,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create users table  
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    role_id INTEGER REFERENCES roles(id),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create work_orders table
+CREATE TABLE work_orders (
+    id SERIAL PRIMARY KEY,
+    work_order_number TEXT NOT NULL UNIQUE,
+    title TEXT NOT NULL,
+    description TEXT,
+    status TEXT NOT NULL DEFAULT 'pending',
+    priority TEXT NOT NULL DEFAULT 'medium',
+    category TEXT,
+    assigned_to INTEGER REFERENCES users(id),
+    created_by INTEGER REFERENCES users(id),
+    requested_by TEXT,
+    technician_id INTEGER,
+    customer_name TEXT,
+    customer_email TEXT,
+EOFNT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO workorder_admin;
+cat: command not found
+root@srv773741:/var/www/workorder-app# npx tsx server/seed.ts
+npm run dev
+/var/www/workorder-app/server/seed.ts:1
+import { db } from "./db";
+         ^
+
+SyntaxError: The requested module './db' does not provide an export named 'db'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:123:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:191:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+/var/www/workorder-app/server/storage.ts:1
+import { db } from "./db";
+         ^
+
+SyntaxError: The requested module './db' does not provide an export named 'db'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:123:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:191:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8

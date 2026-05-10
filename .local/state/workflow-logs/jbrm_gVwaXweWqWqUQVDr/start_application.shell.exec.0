@@ -1,0 +1,55 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+9:08:19 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+9:08:25 PM [express] GET /api/settings/system 304 in 18ms
+9:08:25 PM [express] GET /api/auth/me 304 in 25ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:08:25 PM [express] GET /api/notifications 200 in 58ms
+9:08:26 PM [express] GET /api/dashboard/stats 200 in 101ms
+9:08:26 PM [express] GET /api/dashboard/activity 200 in 105ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:08:56 PM [express] GET /api/notifications 200 in 13ms
+9:08:56 PM [express] GET /api/dashboard/stats 200 in 210ms
+9:08:56 PM [express] GET /api/dashboard/activity 200 in 205ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m9:10:18 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/create-work-order-modal.tsx[22m
+9:10:26 PM [express] GET /api/settings/system 304 in 11ms
+9:10:26 PM [express] GET /api/auth/me 304 in 19ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:10:26 PM [express] GET /api/notifications 200 in 12ms
+9:10:27 PM [express] GET /api/dashboard/activity 200 in 187ms
+9:10:27 PM [express] GET /api/dashboard/stats 200 in 195ms
+9:10:34 PM [express] GET /api/auth/me 401 in 1ms
+9:10:34 PM [express] GET /api/settings/system 200 in 3ms

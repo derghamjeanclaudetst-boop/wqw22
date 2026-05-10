@@ -1,0 +1,91 @@
+# Remove the compressed file
+rm workorder-deployment.zip
+
+# Check what we extracted
+ls -la
+
+# Look for the main project files
+find . -name "package.json" -type f
+find . -name "server" -type d
+total 472
+drwxr-xr-x 11 ubuntu ubuntu   4096 Aug  1 00:07 .
+drwxr-xr-x  4 root   root     4096 Jul 31 23:59 ..
+drwxr-xr-x  4 ubuntu ubuntu   4096 Jun 23 02:56 .cache
+drwxr-xr-x  3 ubuntu ubuntu   4096 Jun 22 02:30 .config
+-rw-r--r--  1 root   root      162 Aug  1 00:03 .env
+-rw-r--r--  1 ubuntu ubuntu     67 Jun 22 02:10 .gitignore
+drwxr-xr-x  3 ubuntu ubuntu   4096 Jun 22 01:33 .local
+-rw-r--r--  1 ubuntu ubuntu    676 Jul 19 13:34 .replit
+drwxr-xr-x  2 ubuntu ubuntu   4096 Jun 25 22:33 .upm
+-rw-r--r--  1 ubuntu ubuntu     33 Jul 31 22:29 README.md
+drwxr-xr-x  2 ubuntu ubuntu   4096 Jul 24 19:51 attached_assets
+drwxr-xr-x  3 ubuntu ubuntu   4096 Jun 22 02:10 client
+-rw-r--r--  1 ubuntu ubuntu  21771 Jun 25 23:53 complete_database_export.sql
+-rw-r--r--  1 ubuntu ubuntu    459 Jun 22 02:10 components.json
+-rw-r--r--  1 ubuntu ubuntu    131 Jul 29 22:52 cookies.txt
+-rw-r--r--  1 ubuntu ubuntu    325 Jun 22 02:10 drizzle.config.ts
+-rw-r--r--  1 ubuntu ubuntu 345396 Jun 25 22:33 package-lock.json
+-rw-r--r--  1 ubuntu ubuntu   3842 Jun 25 22:33 package.json
+-rw-r--r--  1 ubuntu ubuntu     80 Jun 22 02:10 postcss.config.js
+-rw-r--r--  1 ubuntu ubuntu  11484 Jun 25 00:28 postgresql_schema.sql
+-rw-r--r--  1 ubuntu ubuntu   4018 Jul 31 21:43 replit.md
+drwxr-xr-x  3 ubuntu ubuntu   4096 Jul 30 22:58 server
+drwxr-xr-x  2 ubuntu ubuntu   4096 Jul 19 13:34 shared
+-rw-r--r--  1 ubuntu ubuntu   2627 Jun 22 02:10 tailwind.config.ts
+-rw-r--r--  1 ubuntu ubuntu    657 Jun 22 02:10 tsconfig.json
+drwxr-xr-x  7 ubuntu ubuntu   4096 Jul 24 19:41 uploads
+-rw-r--r--  1 ubuntu ubuntu    971 Jun 22 02:10 vite.config.ts
+./.cache/typescript/5.6/package.json
+./package.json
+./server
+root@srv773741:/var/www/workorder-app# # Find the main project directory
+find . -name "package.json" -exec dirname {} \;
+
+# If package.json is in current directory, continue
+# If it's in a subdirectory, navigate there first
+
+npm install
+npm run db:push
+npx tsx server/seed.ts
+npm run dev
+./.cache/typescript/5.6
+.
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@neondatabase/serverless@1.0.1',
+npm warn EBADENGINE   required: { node: '>=19.0.0' },
+npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'better-sqlite3@12.0.0',
+npm warn EBADENGINE   required: { node: '20.x || 22.x || 23.x || 24.x' },
+npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+
+added 537 packages, and audited 538 packages in 2m
+
+72 packages are looking for funding
+  run `npm fund` for details
+
+12 vulnerabilities (3 low, 8 moderate, 1 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> rest-express@1.0.0 db:push
+> drizzle-kit push
+
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/var/www/workorder-app/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+
+Is updated_at column in roles table created or renamed from another column?
+❯ + updated_at               create column
+  ~ permissions › updated_at rename colum

@@ -1,0 +1,57 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:08:43 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:08:54 PM [express] GET /api/auth/me 401 in 2ms
+8:08:54 PM [express] GET /api/settings/system 304 in 9ms
+8:11:19 PM [express] POST /api/auth/login 200 in 154ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:11:20 PM [express] GET /api/notifications 200 in 127ms
+8:11:21 PM [express] GET /api/dashboard/stats 200 in 201ms
+8:11:21 PM [express] GET /api/dashboard/activity 200 in 177ms
+8:11:25 PM [express] GET /api/roles 200 in 44ms
+8:11:25 PM [express] GET /api/users 200 in 48ms
+8:11:27 PM [express] GET /api/work-orders 200 in 144ms
+8:11:30 PM [express] GET /api/clients 200 in 11ms
+8:11:34 PM [express] GET /api/technicians 200 in 23ms
+8:11:34 PM [express] GET /api/work-orders/12/files 200 in 25ms
+Fetching payments for work order 12
+8:11:34 PM [express] GET /api/work-orders/12/parts-requests 200 in 33ms
+8:11:34 PM [express] GET /api/work-orders/12/proposal 200 in 30ms
+Found 0 payments for work order 12: []
+8:11:34 PM [express] GET /api/work-orders/12/payments 200 in 28ms
+8:11:34 PM [express] GET /api/work-orders/12/chats 200 in 57ms
+API: Fetching invoice for work order 12
+API: Found invoice: [90mundefined[39m
+8:11:35 PM [express] GET /api/work-orders/12/invoice 200 in 19ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:11:57 PM [express] GET /api/notifications 200 in 11ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:12:28 PM [express] GET /api/notifications 200 in 64ms
+Chat message created for work order 12 by user 1
+8:12:36 PM [express] POST /api/work-orders/12/chats 201 in 43ms
+8:12:37 PM [express] GET /api/work-orders/12/chats 200 in 48ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:12:58 PM [express] GET /api/notifications 200 in 13ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:13:28 PM [express] GET /api/notifications 200 in 26ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:13:59 PM [express] GET /api/notifications 200 in 27ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:14:29 PM [express] GET /api/notifications 200 in 27ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:14:59 PM [express] GET /api/notifications 200 in 58ms

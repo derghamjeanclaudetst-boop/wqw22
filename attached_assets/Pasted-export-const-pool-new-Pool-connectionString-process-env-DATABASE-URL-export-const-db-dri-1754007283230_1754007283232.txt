@@ -1,0 +1,188 @@
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const db = drizzle({ client: pool, schema });> 
+> # Update the shared schema to use proper PostgreSQL types
+cat > shared/schema.ts << 'EOF'
+import { pgTable, text, integer, timestamp, boolean, jsonb, decimal, uuid } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+
+export const users = pgTable("users", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  username: text("username").notNull().unique(),
+  email: text("email").notNull().unique(),
+  password: text("password").notNull(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  roleId: integer("role_id"),
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const roles = pgTable("roles", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  name: text("name").notNull().unique(),
+  description: text("description"),
+  permissions: jsonb("permissions").default([]),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const workOrders = pgTable("work_orders", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  workOrderNumber: text("work_order_number").notNull().unique(),
+  title: text("title").notNull(),
+  description: text("description"),
+  status: text("status").notNull().default("pending"),
+  priority: text("priority").notNull().default("medium"),
+  category: text("category"),
+  assignedTo: integer("assigned_to"),
+  createdBy: integer("created_by"),
+  requestedBy: text("requested_by"),
+  technicianId: integer("technician_id"),
+EOFort type NewWorkOrder = typeof workOrders.$inferInsert;rkOrders);2 }),
+root@srv773741:/var/www/workorder-app# npm run db:push
+
+> rest-express@1.0.0 db:push
+> drizzle-kit push
+
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/var/www/workorder-app/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+
++ updated_at column will be created
+--- all columns conflicts in roles table resolved ---
+
+
++ updated_at column will be created
+--- all columns conflicts in users table resolved ---
+
+
++ category column will be created
+
++ requested_by column will be created
+
++ technician_id column will be created
+
++ client_name column will be created
+
++ client_phone column will be created
+
++ client_email column will be created
+
++ country column will be created
+
++ city column will be created
+
++ street column will be created
+
++ zip_code column will be created
+
++ nte column will be created
+
++ tnte column will be created
+
++ estimated_hours column will be created
+
++ actual_hours column will be created
+
++ scheduled_date column will be created
+
++ start_date column will be created
+
++ end_date column will be created
+
++ completed_date column will be created
+
++ urgency column will be created
+
++ equipment_type column will be created
+
++ problem_description column will be created
+
++ special_instructions column will be created
+
++ access_instructions column will be created
+
++ safety_requirements column will be created
+
++ assigned_user_ids column will be created
+
++ client_work_order_number column will be created
+
++ is_locked column will be created
+
++ updated_at column will be created
+--- all columns conflicts in work_orders table resolved ---
+
+
+
+error: type "serial" does not exist
+    at /var/www/workorder-app/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.query (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:66575:26)
+    at async pgPush (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:70117:13)
+    at async Object.handler (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:79124:9)
+    at async run (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:78381:7) {
+  length: 93,
+  severity: 'ERROR',
+  code: '42704',
+  detail: undefined,
+  hint: undefined,
+  position: '53',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_type.c',
+  line: '270',
+  routine: 'typenameType'
+}
+
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# 
+root@srv773741:/var/www/workorder-app# npx tsx server/seed.ts
+npm run dev
+/var/www/workorder-app/server/db.ts:9
+  throw new Error(
+        ^
+
+
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+    at <anonymous> (/var/www/workorder-app/server/db.ts:9:9)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+/var/www/workorder-app/server/db.ts:9
+  throw new Error(
+        ^
+
+
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+    at <anonymous> (/var/www/workorder-app/server/db.ts:9:9)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)

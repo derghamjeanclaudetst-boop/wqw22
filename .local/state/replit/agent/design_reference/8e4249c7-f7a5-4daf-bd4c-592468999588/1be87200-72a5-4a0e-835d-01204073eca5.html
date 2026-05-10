@@ -1,0 +1,1057 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Admin Panel - RBAC System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    'sans': ['Inter', 'sans-serif'],
+                },
+                colors: {
+                    primary: '#2563eb',
+                    secondary: '#64748b',
+                    sidebar: '#1e293b',
+                }
+            }
+        }
+    };
+    </script>
+</head>
+<body class="bg-slate-50 font-sans">
+    <!-- @COMPONENT: AppLayout [main application layout with sidebar and content] -->
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- @COMPONENT: Sidebar [navigation sidebar with role-based menu items] -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64">
+                <div class="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto bg-sidebar">
+                    <!-- Logo -->
+                    <div class="flex items-center flex-shrink-0 px-4">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-white text-sm"></i>
+                            </div>
+                            <h1 class="ml-3 text-xl font-semibold text-white">AdminPanel</h1>
+                        </div>
+                    </div>
+                    
+                    <!-- User Info -->
+                    <div class="mt-6 px-4">
+                        <div class="flex items-center p-3 bg-slate-700 rounded-lg">
+                            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                <span class="text-white font-semibold text-sm" data-bind="user.initials">JD</span>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-white" data-bind="user.name">John Doe</p>
+                                <p class="text-xs text-slate-300" data-bind="user.role">Administrator</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <nav class="mt-6 flex-1 px-2 space-y-1">
+                        <!-- @PERMISSION_CHECK: view_dashboard -->
+                        <a href="#dashboard" class="bg-slate-700 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" data-permission="view_dashboard">
+                            <i class="fas fa-tachometer-alt text-slate-300 mr-3 text-sm"></i>
+                            Dashboard
+                        </a>
+                        
+                        <!-- @PERMISSION_CHECK: view_users -->
+                        <a href="#users" class="text-slate-300 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" data-permission="view_users">
+                            <i class="fas fa-users text-slate-400 mr-3 text-sm"></i>
+                            Users
+                        </a>
+                        
+                        <!-- @PERMISSION_CHECK: view_roles -->
+                        <a href="#roles" class="text-slate-300 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" data-permission="view_roles">
+                            <i class="fas fa-user-tag text-slate-400 mr-3 text-sm"></i>
+                            Roles & Permissions
+                        </a>
+                        
+                        <!-- @PERMISSION_CHECK: view_equipment -->
+                        <a href="#equipment" class="text-slate-300 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md" data-permission="view_equipment">
+                            <i class="fas fa-cogs text-slate-400 mr-3 text-sm"></i>
+                            Equipment
+                        </a>
+                        
+                        <a href="#reports" class="text-slate-300 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <i class="fas fa-chart-bar text-slate-400 mr-3 text-sm"></i>
+                            Reports
+                        </a>
+                        
+                        <a href="#settings" class="text-slate-300 hover:bg-slate-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                            <i class="fas fa-cog text-slate-400 mr-3 text-sm"></i>
+                            Settings
+                        </a>
+                    </nav>
+
+                    <!-- Logout -->
+                    <div class="flex-shrink-0 flex border-t border-slate-700 p-4">
+                        <button class="flex-shrink-0 w-full group block text-left" data-event="click:handleLogout">
+                            <div class="flex items-center">
+                                <i class="fas fa-sign-out-alt text-slate-400 mr-3"></i>
+                                <span class="text-sm font-medium text-slate-300 group-hover:text-white">Logout</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent [main application content area] -->
+        <div class="flex flex-col w-0 flex-1 overflow-hidden">
+            <!-- Top bar -->
+            <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+                <button class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary md:hidden">
+                    <i class="fas fa-bars text-lg"></i>
+                </button>
+                <div class="flex-1 px-4 flex justify-between">
+                    <div class="flex-1 flex">
+                        <div class="w-full flex md:ml-0">
+                            <label for="search-field" class="sr-only">Search</label>
+                            <div class="relative w-full text-gray-400 focus-within:text-gray-600">
+                                <div class="absolute inset-y-0 left-0 flex items-center pointer-events-none">
+                                    <i class="fas fa-search text-sm"></i>
+                                </div>
+                                <input id="search-field" class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent" placeholder="Search users, roles..." type="search">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <button class="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            <i class="fas fa-bell text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- @COMPONENT: PageContent [dynamic page content based on navigation] -->
+            <main class="flex-1 relative overflow-y-auto focus:outline-none" id="main-content">
+                
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="py-6">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
+                        <p class="mt-2 text-sm text-gray-600">Welcome back! Here's what's happening with your system.</p>
+                    </div>
+                    
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <!-- Stats Cards -->
+                        <div class="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                            <!-- @PERMISSION_CHECK: view_users -->
+                            <div class="bg-white overflow-hidden shadow rounded-lg" data-permission="view_users">
+                                <div class="p-5">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-users text-2xl text-primary"></i>
+                                        </div>
+                                        <div class="ml-5 w-0 flex-1">
+                                            <dl>
+                                                <dt class="text-sm font-medium text-gray-500 truncate">Total Users</dt>
+                                                <dd class="text-lg font-medium text-gray-900" data-bind="stats.totalUsers">1,247</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-5 py-3">
+                                    <div class="text-sm">
+                                        <span class="text-green-600 font-medium">+12%</span>
+                                        <span class="text-gray-500">from last month</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white overflow-hidden shadow rounded-lg">
+                                <div class="p-5">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-user-tag text-2xl text-green-600"></i>
+                                        </div>
+                                        <div class="ml-5 w-0 flex-1">
+                                            <dl>
+                                                <dt class="text-sm font-medium text-gray-500 truncate">Active Roles</dt>
+                                                <dd class="text-lg font-medium text-gray-900" data-bind="stats.activeRoles">3</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-5 py-3">
+                                    <div class="text-sm">
+                                        <span class="text-gray-500">Admin, Manager, Viewer</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- @PERMISSION_CHECK: view_equipment -->
+                            <div class="bg-white overflow-hidden shadow rounded-lg" data-permission="view_equipment">
+                                <div class="p-5">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-cogs text-2xl text-amber-600"></i>
+                                        </div>
+                                        <div class="ml-5 w-0 flex-1">
+                                            <dl>
+                                                <dt class="text-sm font-medium text-gray-500 truncate">Equipment</dt>
+                                                <dd class="text-lg font-medium text-gray-900" data-bind="stats.equipment">89</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-5 py-3">
+                                    <div class="text-sm">
+                                        <span class="text-green-600 font-medium">95%</span>
+                                        <span class="text-gray-500">operational</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-white overflow-hidden shadow rounded-lg">
+                                <div class="p-5">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-shield-alt text-2xl text-red-600"></i>
+                                        </div>
+                                        <div class="ml-5 w-0 flex-1">
+                                            <dl>
+                                                <dt class="text-sm font-medium text-gray-500 truncate">Security Events</dt>
+                                                <dd class="text-lg font-medium text-gray-900" data-bind="stats.securityEvents">0</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-5 py-3">
+                                    <div class="text-sm">
+                                        <span class="text-green-600 font-medium">All Clear</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="mt-8">
+                            <div class="bg-white shadow rounded-lg">
+                                <div class="px-4 py-5 sm:p-6">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900">Recent Activity</h3>
+                                    <div class="mt-5">
+                                        <!-- @MAP: activities.map(activity => ( -->
+                                        <div class="flow-root">
+                                            <ul class="-mb-8">
+                                                <li data-mock="true">
+                                                    <div class="relative pb-8">
+                                                        <div class="relative flex space-x-3">
+                                                            <div>
+                                                                <span class="h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white">
+                                                                    <i class="fas fa-user-plus text-white text-xs"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                                <div>
+                                                                    <p class="text-sm text-gray-500">New user <span class="font-medium text-gray-900">Sarah Wilson</span> was created by <span class="font-medium text-gray-900">Admin</span></p>
+                                                                </div>
+                                                                <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                                    <time>2 hours ago</time>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li data-mock="true">
+                                                    <div class="relative pb-8">
+                                                        <div class="relative flex space-x-3">
+                                                            <div>
+                                                                <span class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center ring-8 ring-white">
+                                                                    <i class="fas fa-user-tag text-white text-xs"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                                <div>
+                                                                    <p class="text-sm text-gray-500">Role <span class="font-medium text-gray-900">Manager</span> assigned to <span class="font-medium text-gray-900">Mike Johnson</span></p>
+                                                                </div>
+                                                                <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                                    <time>4 hours ago</time>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li data-mock="true">
+                                                    <div class="relative">
+                                                        <div class="relative flex space-x-3">
+                                                            <div>
+                                                                <span class="h-8 w-8 rounded-full bg-amber-500 flex items-center justify-center ring-8 ring-white">
+                                                                    <i class="fas fa-cogs text-white text-xs"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                                                <div>
+                                                                    <p class="text-sm text-gray-500">Equipment <span class="font-medium text-gray-900">Server #23</span> went offline</p>
+                                                                </div>
+                                                                <div class="text-right text-sm whitespace-nowrap text-gray-500">
+                                                                    <time>6 hours ago</time>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- @END_MAP )) -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Management View -->
+                <div id="users-view" class="py-6 hidden">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h1 class="text-2xl font-semibold text-gray-900">User Management</h1>
+                                <p class="mt-2 text-sm text-gray-600">Manage users and their access levels.</p>
+                            </div>
+                            <!-- @PERMISSION_CHECK: edit_users -->
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-permission="edit_users" data-event="click:openCreateUserModal">
+                                <i class="fas fa-plus mr-2"></i>Add User
+                            </button>
+                        </div>
+
+                        <!-- Filters -->
+                        <div class="mt-6 bg-white rounded-lg shadow p-4">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Role</label>
+                                    <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                                        <option>All Roles</option>
+                                        <option>Admin</option>
+                                        <option>Manager</option>
+                                        <option>Viewer</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Status</label>
+                                    <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                                        <option>All Status</option>
+                                        <option>Active</option>
+                                        <option>Inactive</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Date Joined</label>
+                                    <input type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                                </div>
+                                <div class="flex items-end">
+                                    <button class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors w-full">
+                                        <i class="fas fa-search mr-2"></i>Filter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Users Table -->
+                        <div class="mt-6 bg-white shadow rounded-lg overflow-hidden">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Login</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- @MAP: users.map(user => ( -->
+                                    <tr data-mock="true">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0">
+                                                    <div class="h-10 w-10 rounded-full bg-primary flex items-center justify-center">
+                                                        <span class="text-white font-semibold text-sm">JD</span>
+                                                    </div>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">John Doe</div>
+                                                    <div class="text-sm text-gray-500">john.doe@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Admin</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            2 hours ago
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <!-- @PERMISSION_CHECK: edit_users -->
+                                            <button class="text-primary hover:text-blue-900 mr-3" data-permission="edit_users">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <!-- @PERMISSION_CHECK: assign_roles -->
+                                            <button class="text-green-600 hover:text-green-900 mr-3" data-permission="assign_roles">
+                                                <i class="fas fa-user-tag"></i>
+                                            </button>
+                                            <!-- @PERMISSION_CHECK: edit_users -->
+                                            <button class="text-red-600 hover:text-red-900" data-permission="edit_users">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-mock="true">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0">
+                                                    <div class="h-10 w-10 rounded-full bg-green-500 flex items-center justify-center">
+                                                        <span class="text-white font-semibold text-sm">SW</span>
+                                                    </div>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Sarah Wilson</div>
+                                                    <div class="text-sm text-gray-500">sarah.wilson@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Manager</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            1 day ago
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary hover:text-blue-900 mr-3" data-permission="edit_users">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-green-600 hover:text-green-900 mr-3" data-permission="assign_roles">
+                                                <i class="fas fa-user-tag"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900" data-permission="edit_users">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-mock="true">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0">
+                                                    <div class="h-10 w-10 rounded-full bg-amber-500 flex items-center justify-center">
+                                                        <span class="text-white font-semibold text-sm">MJ</span>
+                                                    </div>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Mike Johnson</div>
+                                                    <div class="text-sm text-gray-500">mike.johnson@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">Viewer</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">Inactive</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            1 week ago
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary hover:text-blue-900 mr-3" data-permission="edit_users">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="text-green-600 hover:text-green-900 mr-3" data-permission="assign_roles">
+                                                <i class="fas fa-user-tag"></i>
+                                            </button>
+                                            <button class="text-red-600 hover:text-red-900" data-permission="edit_users">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- @END_MAP )) -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="mt-6 flex items-center justify-between">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <button class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Previous</button>
+                                <button class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Next</button>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">97</span> results</p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                                        <button class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button class="bg-primary border-primary text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</button>
+                                        <button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">2</button>
+                                        <button class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">3</button>
+                                        <button class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roles Management View -->
+                <div id="roles-view" class="py-6 hidden">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h1 class="text-2xl font-semibold text-gray-900">Roles & Permissions</h1>
+                                <p class="mt-2 text-sm text-gray-600">Configure roles and their associated permissions.</p>
+                            </div>
+                            <!-- @PERMISSION_CHECK: assign_roles -->
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-permission="assign_roles">
+                                <i class="fas fa-plus mr-2"></i>Create Role
+                            </button>
+                        </div>
+
+                        <div class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Admin Role -->
+                            <div class="bg-white shadow rounded-lg overflow-hidden">
+                                <div class="px-6 py-4 bg-blue-50 border-b border-blue-200">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-medium text-blue-900">Administrator</h3>
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">3 users</span>
+                                    </div>
+                                    <p class="mt-1 text-sm text-blue-700">Full system access and management capabilities</p>
+                                </div>
+                                <div class="px-6 py-4">
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Permissions</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_dashboard</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_users</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">edit_users</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_roles</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">assign_roles</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_equipment</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">edit_equipment</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-6 py-3 bg-gray-50 border-t">
+                                    <!-- @PERMISSION_CHECK: assign_roles -->
+                                    <button class="text-primary hover:text-blue-700 text-sm font-medium" data-permission="assign_roles">
+                                        <i class="fas fa-edit mr-1"></i>Edit Permissions
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Manager Role -->
+                            <div class="bg-white shadow rounded-lg overflow-hidden">
+                                <div class="px-6 py-4 bg-green-50 border-b border-green-200">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-medium text-green-900">Manager</h3>
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">8 users</span>
+                                    </div>
+                                    <p class="mt-1 text-sm text-green-700">Limited management and viewing capabilities</p>
+                                </div>
+                                <div class="px-6 py-4">
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Permissions</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_dashboard</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_users</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                            <span class="text-sm text-gray-400">edit_users</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_roles</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                            <span class="text-sm text-gray-400">assign_roles</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_equipment</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">edit_equipment</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-6 py-3 bg-gray-50 border-t">
+                                    <button class="text-primary hover:text-blue-700 text-sm font-medium" data-permission="assign_roles">
+                                        <i class="fas fa-edit mr-1"></i>Edit Permissions
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Viewer Role -->
+                            <div class="bg-white shadow rounded-lg overflow-hidden">
+                                <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-lg font-medium text-gray-900">Viewer</h3>
+                                        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">15 users</span>
+                                    </div>
+                                    <p class="mt-1 text-sm text-gray-700">Read-only access to system information</p>
+                                </div>
+                                <div class="px-6 py-4">
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Permissions</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_dashboard</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                            <span class="text-sm text-gray-700">view_users</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                            <span class="text-sm text-gray-400">edit_users</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                            <span class="text-sm text-gray-400">view_roles</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                            <span class="text-sm text-gray-400">assign_roles</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                            <span class="text-sm text-gray-400">view_equipment</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-times-circle text-red-500 mr-2"></i>
+                                            <span class="text-sm text-gray-400">edit_equipment</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-6 py-3 bg-gray-50 border-t">
+                                    <button class="text-primary hover:text-blue-700 text-sm font-medium" data-permission="assign_roles">
+                                        <i class="fas fa-edit mr-1"></i>Edit Permissions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Permission Matrix -->
+                        <div class="mt-8 bg-white shadow rounded-lg overflow-hidden">
+                            <div class="px-6 py-4 border-b border-gray-200">
+                                <h3 class="text-lg font-medium text-gray-900">Permission Matrix</h3>
+                                <p class="mt-1 text-sm text-gray-600">Overview of all permissions across roles</p>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Permission</th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Admin</th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Manager</th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Viewer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">view_dashboard</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">view_users</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">edit_users</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-times-circle text-red-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-times-circle text-red-500"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">view_roles</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-times-circle text-red-500"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">assign_roles</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-times-circle text-red-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-times-circle text-red-500"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">view_equipment</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-times-circle text-red-500"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">edit_equipment</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-check-circle text-green-500"></i>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                <i class="fas fa-times-circle text-red-500"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Equipment Management View -->
+                <div id="equipment-view" class="py-6 hidden">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h1 class="text-2xl font-semibold text-gray-900">Equipment Management</h1>
+                                <p class="mt-2 text-sm text-gray-600">Monitor and manage system equipment.</p>
+                            </div>
+                            <!-- @PERMISSION_CHECK: edit_equipment -->
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors" data-permission="edit_equipment">
+                                <i class="fas fa-plus mr-2"></i>Add Equipment
+                            </button>
+                        </div>
+
+                        <!-- Equipment Cards -->
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <!-- @MAP: equipment.map(item => ( -->
+                            <div class="bg-white shadow rounded-lg p-6" data-mock="true">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-server text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h3 class="text-lg font-medium text-gray-900">Server #01</h3>
+                                            <p class="text-sm text-gray-500">Main Database Server</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Online</span>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">CPU Usage</span>
+                                        <span class="font-medium">45%</span>
+                                    </div>
+                                    <div class="mt-1 w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-600 h-2 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">Memory</span>
+                                        <span class="font-medium">67%</span>
+                                    </div>
+                                    <div class="mt-1 w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 67%"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <!-- @PERMISSION_CHECK: edit_equipment -->
+                                    <button class="flex-1 bg-primary text-white px-3 py-1 rounded text-sm hover:bg-blue-700" data-permission="edit_equipment">
+                                        Configure
+                                    </button>
+                                    <button class="px-3 py-1 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50">
+                                        Details
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bg-white shadow rounded-lg p-6" data-mock="true">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-network-wired text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h3 class="text-lg font-medium text-gray-900">Network Switch</h3>
+                                            <p class="text-sm text-gray-500">Core Network Device</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Online</span>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">Port Usage</span>
+                                        <span class="font-medium">24/48</span>
+                                    </div>
+                                    <div class="mt-1 w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-600 h-2 rounded-full" style="width: 50%"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">Bandwidth</span>
+                                        <span class="font-medium">85%</span>
+                                    </div>
+                                    <div class="mt-1 w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-red-500 h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <button class="flex-1 bg-primary text-white px-3 py-1 rounded text-sm hover:bg-blue-700" data-permission="edit_equipment">
+                                        Configure
+                                    </button>
+                                    <button class="px-3 py-1 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50">
+                                        Details
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="bg-white shadow rounded-lg p-6" data-mock="true">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-hdd text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h3 class="text-lg font-medium text-gray-900">Storage Array</h3>
+                                            <p class="text-sm text-gray-500">Backup Storage System</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">Offline</span>
+                                </div>
+                                <div class="mt-4">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">Disk Usage</span>
+                                        <span class="font-medium">--</span>
+                                    </div>
+                                    <div class="mt-1 w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-400 h-2 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-gray-500">Status</span>
+                                        <span class="font-medium text-red-600">Maintenance</span>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex space-x-2">
+                                    <button class="flex-1 bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700" data-permission="edit_equipment">
+                                        Restart
+                                    </button>
+                                    <button class="px-3 py-1 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50">
+                                        Details
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- @END_MAP )) -->
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <!-- @END_COMPONENT: PageContent -->
+        </div>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+    <!-- @END_COMPONENT: AppLayout -->
+
+    <!-- @COMPONENT: CreateUserModal [modal for creating new users] -->
+    <div id="create-user-modal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden" data-modal="createUser">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Create New User</h3>
+                    <button class="text-gray-400 hover:text-gray-600" data-event="click:closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="Enter full name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="Enter email address">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Role</label>
+                        <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary">
+                            <option>Select a role</option>
+                            <option>Admin</option>
+                            <option>Manager</option>
+                            <option>Viewer</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary" placeholder="Enter password">
+                    </div>
+                    <div class="flex justify-end space-x-3 pt-4">
+                        <button type="button" class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50" data-event="click:closeModal">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium hover:bg-blue-700" data-event="click:handleCreateUser">
+                            Create User
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: CreateUserModal -->
+
+    <script>
+    // TODO: Implement business logic, API calls, and state management
+    
+    (function() {
+        // Navigation handling
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+        const views = document.querySelectorAll('[id$="-view"]');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1) + '-view';
+                
+                // Hide all views
+                views.forEach(view => view.classList.add('hidden'));
+                
+                // Show target view
+                const targetView = document.getElementById(targetId);
+                if (targetView) {
+                    targetView.classList.remove('hidden');
+                }
+                
+                // Update active nav state
+                navLinks.forEach(l => l.classList.remove('bg-slate-700', 'text-white'));
+                navLinks.forEach(l => l.classList.add('text-slate-300', 'hover:bg-slate-700', 'hover:text-white'));
+                this.classList.remove('text-slate-300', 'hover:bg-slate-700', 'hover:text-white');
+                this.classList.add('bg-slate-700', 'text-white');
+            });
+        });
+        
+        // Permission-based UI visibility
+        function checkPermissions() {
+            const userRole = 'admin'; // TODO: Get from authenticated user session
+            const permissions = {
+                'admin': ['view_dashboard', 'view_users', 'edit_users', 'view_roles', 'assign_roles', 'view_equipment', 'edit_equipment'],
+                'manager': ['view_dashboard', 'view_users', 'view_roles', 'view_equipment', 'edit_equipment'],
+                'viewer': ['view_dashboard', 'view_users']
+            };
+            
+            const userPermissions = permissions[userRole] || [];
+            
+            document.querySelectorAll('[data-permission]').forEach(element => {
+                const requiredPermission = element.getAttribute('data-permission');
+                if (!userPermissions.includes(requiredPermission)) {
+                    element.style.display = 'none';
+                }
+            });
+        }
+        
+        // Modal handling
+        function setupModals() {
+            const createUserModal = document.getElementById('create-user-modal');
+            
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event*="openCreateUserModal"]')) {
+                    createUserModal.classList.remove('hidden');
+                }
+                
+                if (e.target.closest('[data-event*="closeModal"]')) {
+                    createUserModal.classList.add('hidden');
+                }
+            });
+        }
+        
+        // Initialize app
+        checkPermissions();
+        setupModals();
+        
+        // TODO: Implement RBAC middleware integration
+        // TODO: Add form validation and submission handlers
+        // TODO: Connect to Django backend APIs
+        // TODO: Implement real-time data updates
+        // TODO: Add error handling and loading states
+    })();
+    </script>
+</body>
+</html>

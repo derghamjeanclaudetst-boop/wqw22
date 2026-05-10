@@ -1,0 +1,189 @@
+Work Order Main Page
+Each Work Order record should have the following fields:
+
+Work Order Number (unique, starts with letters + number, e.g., "WO-2025-001")
+
+Client Name
+
+Country
+
+City
+
+Street
+
+NTE (amount without tax)
+
+TNTE (amount including tax)
+
+Start Date
+
+End Date
+
+Assigned User (relationship: only assigned user can view this work order)
+
+After pressing Create, each Work Order will display a button to open a modal with 6 sub-modules related to that specific Work Order:
+
+🔘 Work Order Modal (Tabs or Sections):
+1. Proposal Page
+Contains 3 tables:
+
+A. Labor Table
+Transaction Date
+
+Pay Rate
+
+Regular Hours
+
+OT Hours
+
+OT Scale
+
+Remark
+
+➕ Add Row button
+
+B. Parts Table
+Transaction Date
+
+Unit Cost
+
+Quantity
+
+Remark
+
+➕ Add Row button
+
+C. Services Table
+Transaction Date
+
+Transaction Type
+
+Unit Cost
+
+Quantity
+
+Remark
+
+➕ Add Row button
+
+Below the 3 tables, include:
+
+Message Section (textarea to leave comments)
+
+Proposal Status:
+
+Each Proposal is marked as: Pending, Approved, or Canceled
+
+Include a Print button to print the proposal
+
+2. Parts Request Page
+Add Part:
+
+Part Name
+
+Quantity
+
+Unit Price
+
+Total Price (auto)
+
+Store Name
+
+Remark
+
+Parts list table is saved per work order
+
+Request Button: sends this list to Technician Payment Management Page for approval
+
+Payment Manager can approve or reject part purchases
+
+3. File Upload Page
+Contains 3 folders:
+
+Before
+
+After
+
+Signature
+
+📌 Minimum 3 images required for "Before" and "After" folders
+Allow file uploads (images, PDFs) inside each folder.
+
+4. Chat Page
+Only assigned user(s) can use this chat
+
+Chat should allow:
+
+Messages
+
+File Sharing
+
+Image Sharing
+
+5. Technician Payment Page
+Select Technician:
+
+From list or from Map
+
+After selecting technician, show all their payment methods
+
+Show payment method details (PayPal link, card details, etc.)
+
+Fields:
+
+Technician Name
+
+Selected Payment Method
+
+Amount to Pay
+
+➕ Request Payment Button (sends to Technician Payment Management)
+
+6. Technician Payment Management Page
+Show all technician payment requests:
+
+Work Order Number
+
+Technician Name
+
+Payment Method + Details
+
+Amount Approved
+
+Amount Already Paid
+
+Amount Remaining
+
+Status: Pending, Partially Paid, Paid
+
+Admin can:
+
+Approve full or partial payment
+
+Update payment records
+
+View history
+
+🧾 Invoice Page
+Automatically gather:
+
+All approved parts (from Parts Request)
+
+All assigned technicians and amounts approved for them
+
+Section for:
+
+Extra Charges / Additional Amount
+
+Final Total Calculation
+
+Buttons:
+
+Save Invoice
+
+Print Invoice
+
+🔐 Permissions Logic
+Only assigned users can see or chat inside a specific work order
+
+Technician is not a system user

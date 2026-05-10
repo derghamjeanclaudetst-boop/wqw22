@@ -1,0 +1,117 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:56:08 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:56:13 PM [express] GET /api/settings/system 304 in 16ms
+8:56:13 PM [express] GET /api/auth/me 304 in 27ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:56:13 PM [express] GET /api/notifications 200 in 13ms
+8:56:14 PM [express] GET /api/dashboard/stats 200 in 224ms
+8:56:14 PM [express] GET /api/dashboard/activity 200 in 234ms
+8:56:14 PM [express] GET /api/dashboard/my-stats 200 in 221ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:56:43 PM [express] GET /api/notifications 200 in 14ms
+8:56:45 PM [express] GET /api/dashboard/stats 200 in 259ms
+8:56:45 PM [express] GET /api/dashboard/my-stats 200 in 250ms
+8:56:45 PM [express] GET /api/dashboard/activity 200 in 258ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:57:02 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/invoice-management.tsx[22m
+8:57:05 PM [express] GET /api/settings/system 304 in 7ms
+8:57:05 PM [express] GET /api/auth/me 304 in 20ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:57:05 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/invoice-management.tsx[22m [33m(x2)[39m
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:57:05 PM [express] GET /api/notifications 200 in 12ms
+8:57:09 PM [express] GET /api/settings/system 304 in 8ms
+8:57:09 PM [express] GET /api/auth/me 304 in 16ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:57:09 PM [express] GET /api/notifications 200 in 12ms
+8:57:10 PM [express] GET /api/dashboard/stats 200 in 189ms
+8:57:10 PM [express] GET /api/dashboard/activity 200 in 199ms
+8:57:10 PM [express] GET /api/dashboard/my-stats 200 in 196ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:57:14 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/invoice-management.tsx[22m [33m(x3)[39m
+8:57:20 PM [express] GET /api/settings/system 304 in 10ms
+8:57:20 PM [express] GET /api/auth/me 304 in 20ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:57:20 PM [express] GET /api/notifications 200 in 14ms
+8:57:21 PM [express] GET /api/dashboard/stats 200 in 226ms
+8:57:21 PM [express] GET /api/dashboard/activity 200 in 226ms
+8:57:21 PM [express] GET /api/dashboard/my-stats 200 in 227ms

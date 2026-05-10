@@ -1,0 +1,188 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:47:24 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:47:30 PM [express] GET /api/settings/system 304 in 10ms
+8:47:30 PM [express] GET /api/auth/me 304 in 25ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:47:31 PM [express] GET /api/notifications 200 in 77ms
+8:47:32 PM [express] GET /api/dashboard/stats 200 in 243ms
+8:47:32 PM [express] GET /api/dashboard/my-stats 200 in 241ms
+8:47:32 PM [express] GET /api/dashboard/activity 200 in 251ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:48:01 PM [express] GET /api/notifications 200 in 13ms
+8:48:02 PM [express] GET /api/dashboard/stats 200 in 271ms
+8:48:02 PM [express] GET /api/dashboard/my-stats 200 in 171ms
+8:48:02 PM [express] GET /api/dashboard/activity 200 in 139ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:48:32 PM [express] GET /api/notifications 200 in 13ms
+8:48:33 PM [express] GET /api/dashboard/stats 200 in 238ms
+8:48:33 PM [express] GET /api/dashboard/my-stats 200 in 235ms
+8:48:33 PM [express] GET /api/dashboard/activity 200 in 177ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:49:02 PM [express] GET /api/notifications 200 in 15ms
+8:49:04 PM [express] GET /api/dashboard/stats 200 in 296ms
+8:49:04 PM [express] GET /api/dashboard/activity 200 in 197ms
+8:49:04 PM [express] GET /api/dashboard/my-stats 200 in 201ms
+8:49:14 PM [express] GET /api/roles 200 in 90ms
+8:49:14 PM [express] GET /api/users 200 in 92ms
+8:49:14 PM [express] GET /api/permissions 200 in 22ms
+8:49:14 PM [express] GET /api/technicians 200 in 27ms
+8:49:14 PM [express] GET /api/invoices/all 200 in 124ms
+8:49:14 PM [express] GET /api/parts-requests 200 in 206ms
+8:49:15 PM [express] GET /api/payment-requests 200 in 22ms
+8:49:16 PM [express] GET /api/work-orders 200 in 181ms
+8:49:21 PM [express] GET /api/proposals 200 in 5241ms
+8:49:23 PM [express] GET /api/work-orders-without-proposals 200 in 4852ms
+8:49:47 PM [express] GET /api/settings/system 304 in 9ms
+8:49:47 PM [express] GET /api/auth/me 304 in 15ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:49:47 PM [express] GET /api/notifications 200 in 11ms
+8:49:53 PM [express] GET /api/proposals 200 in 4905ms
+8:49:53 PM [express] GET /api/work-orders-without-proposals 200 in 4914ms
+8:50:08 PM [express] GET /api/proposals 200 in 4848ms
+8:50:08 PM [express] GET /api/work-orders-without-proposals 200 in 4899ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:50:18 PM [express] GET /api/notifications 200 in 48ms
+8:50:18 PM [express] GET /api/proposals 200 in 4740ms
+8:50:25 PM [express] GET /api/work-orders-without-proposals 200 in 4672ms
+8:50:28 PM [express] GET /api/proposals 200 in 4669ms
+8:50:36 PM [express] GET /api/work-orders-without-proposals 200 in 4717ms
+8:50:38 PM [express] GET /api/proposals 200 in 4644ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:50:48 PM [express] GET /api/notifications 200 in 26ms
+8:50:49 PM [express] GET /api/proposals 200 in 4864ms
+8:50:50 PM [express] GET /api/work-orders-without-proposals 200 in 4826ms
+8:50:59 PM [express] GET /api/proposals 200 in 4877ms
+8:51:01 PM [express] GET /api/work-orders-without-proposals 200 in 4744ms
+8:51:05 PM [express] GET /api/roles 200 in 42ms
+8:51:05 PM [express] GET /api/users 200 in 46ms
+8:51:05 PM [express] GET /api/permissions 200 in 19ms
+8:51:07 PM [express] GET /api/analytics 200 in 137ms
+8:51:09 PM [express] GET /api/proposals 200 in 4717ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:51:12 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/analytics.tsx, /src/index.css?v=16nvcKtVah-Mbh6levJhy[22m
+8:51:14 PM [express] GET /api/analytics 200 in 130ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:51:36 PM [express] GET /api/notifications 200 in 24ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:51:46 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/en.json[22m
+8:51:50 PM [express] GET /api/settings/system 304 in 41ms
+8:51:50 PM [express] GET /api/auth/me 304 in 80ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:51:50 PM [express] GET /api/notifications 200 in 19ms
+8:51:51 PM [express] GET /api/analytics 304 in 246ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:52:21 PM [express] GET /api/notifications 200 in 22ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:52:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/locales/ar.json[22m
+8:52:31 PM [express] GET /api/settings/system 304 in 8ms
+8:52:31 PM [express] GET /api/auth/me 304 in 20ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:52:31 PM [express] GET /api/notifications 200 in 13ms
+8:52:32 PM [express] GET /api/auth/me 401 in 0ms
+8:52:32 PM [express] GET /api/analytics 304 in 260ms
+8:52:32 PM [express] GET /api/settings/system 304 in 3ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:53:01 PM [express] GET /api/notifications 200 in 46ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:53:32 PM [express] GET /api/notifications 200 in 37ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:54:02 PM [express] GET /api/notifications 200 in 25ms
+8:54:03 PM [express] GET /api/users 200 in 115ms
+8:54:03 PM [express] GET /api/permissions 200 in 110ms
+8:54:03 PM [express] GET /api/roles 200 in 115ms
+8:54:03 PM [express] GET /api/work-orders 200 in 250ms
+8:54:03 PM [express] GET /api/parts-requests 200 in 149ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:54:32 PM [express] GET /api/notifications 200 in 11ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:55:03 PM [express] GET /api/notifications 200 in 24ms

@@ -1,0 +1,23 @@
+[vite] connecting...
+[vite] connected.
+Warning: validateDOMNesting(...): <a> cannot appear as a descendant of &lt;a&gt;.
+    at a
+    at a
+    at https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=597c79ac:337:18
+    at PermissionGuard (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/components/rbac/permission-guard.tsx:20:3)
+    at nav
+    at div
+    at div
+    at Sidebar (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/components/layout/sidebar.tsx:24:27)
+    at div
+    at MainLayout (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/components/layout/main-layout.tsx:22:30)
+    at ProtectedRoute (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/App.tsx?v=tYpuCcOxS6R9H4ZlEQzO7:31:38)
+    at component
+    at Route (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=597c79ac:323:16)
+    at Switch (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=597c79ac:379:17)
+    at Router
+    at AuthProvider (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/hooks/use-auth.tsx:22:32)
+    at Provider (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=cec9a042:38:15)
+    at TooltipProvider (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=ec132644:59:5)
+    at QueryClientProvider (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=2bfe3aa5:2805:3)
+    at App

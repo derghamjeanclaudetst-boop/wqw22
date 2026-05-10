@@ -1,0 +1,230 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:16:57 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:17:05 PM [express] GET /api/settings/system 304 in 12ms
+8:17:05 PM [express] GET /api/auth/me 304 in 26ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:17:06 PM [express] GET /api/notifications 200 in 91ms
+8:17:06 PM [express] GET /api/dashboard/stats 200 in 200ms
+8:17:06 PM [express] GET /api/dashboard/activity 200 in 199ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:17:14 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/work-order-proposal-modal.tsx[22m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:17:15 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/parts-request-modal.tsx[22m
+8:17:21 PM [express] GET /api/settings/system 304 in 13ms
+8:17:21 PM [express] GET /api/auth/me 304 in 20ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:17:21 PM [express] GET /api/notifications 200 in 14ms
+8:17:22 PM [express] GET /api/dashboard/activity 200 in 188ms
+8:17:22 PM [express] GET /api/dashboard/stats 200 in 192ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:17:23 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/parts-request-modal.tsx[22m [33m(x2)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:17:27 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/parts-request-modal.tsx[22m [33m(x3)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:17:29 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/parts-request-modal.tsx[22m [33m(x4)[39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:17:31 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/parts-request-modal.tsx[22m [33m(x5)[39m
+8:17:38 PM [express] GET /api/settings/system 304 in 9ms
+8:17:38 PM [express] GET /api/auth/me 304 in 19ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:17:38 PM [express] GET /api/notifications 200 in 12ms
+8:17:39 PM [express] GET /api/dashboard/activity 200 in 166ms
+8:17:39 PM [express] GET /api/dashboard/stats 200 in 168ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:17:45 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/work-order-proposal-modal.tsx[22m
+8:17:51 PM [express] GET /api/settings/system 304 in 9ms
+8:17:51 PM [express] GET /api/auth/me 304 in 18ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:17:51 PM [express] GET /api/notifications 200 in 10ms
+8:17:52 PM [express] GET /api/dashboard/stats 200 in 150ms
+8:17:52 PM [express] GET /api/dashboard/activity 200 in 149ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:18:07 PM[22m [36m[1m[vite][22m[39m [32mpage reload [39m[2msrc/components/modals/work-order-proposal-modal.tsx[22m [33m(x2)[39m

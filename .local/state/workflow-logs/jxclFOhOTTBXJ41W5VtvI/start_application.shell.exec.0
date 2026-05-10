@@ -1,0 +1,54 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:57:23 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:57:33 PM [express] GET /api/settings/system 304 in 14ms
+8:57:33 PM [express] GET /api/auth/me 304 in 26ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:57:33 PM [express] GET /api/notifications 200 in 59ms
+8:57:35 PM [express] GET /api/dashboard/activity 200 in 293ms
+8:57:35 PM [express] GET /api/dashboard/my-stats 200 in 312ms
+8:57:35 PM [express] GET /api/dashboard/stats 200 in 319ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:58:04 PM [express] GET /api/notifications 200 in 12ms
+8:58:05 PM [express] GET /api/dashboard/activity 200 in 260ms
+8:58:05 PM [express] GET /api/dashboard/my-stats 200 in 234ms
+8:58:05 PM [express] GET /api/dashboard/stats 200 in 234ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:58:34 PM [express] GET /api/notifications 200 in 14ms
+8:58:36 PM [express] GET /api/dashboard/activity 200 in 260ms
+8:58:36 PM [express] GET /api/dashboard/my-stats 200 in 295ms
+8:58:36 PM [express] GET /api/dashboard/stats 200 in 298ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:59:04 PM [express] GET /api/notifications 200 in 13ms
+8:59:07 PM [express] GET /api/dashboard/activity 200 in 233ms
+8:59:07 PM [express] GET /api/dashboard/my-stats 200 in 257ms
+8:59:07 PM [express] GET /api/dashboard/stats 200 in 270ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:59:34 PM [express] GET /api/notifications 200 in 16ms
+8:59:37 PM [express] GET /api/dashboard/my-stats 200 in 271ms
+8:59:37 PM [express] GET /api/dashboard/activity 200 in 269ms
+8:59:37 PM [express] GET /api/dashboard/stats 200 in 293ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:00:05 PM [express] GET /api/notifications 200 in 13ms
+9:00:08 PM [express] GET /api/dashboard/my-stats 200 in 252ms
+9:00:08 PM [express] GET /api/dashboard/activity 200 in 280ms
+9:00:08 PM [express] GET /api/dashboard/stats 200 in 285ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:00:35 PM [express] GET /api/notifications 200 in 57ms
+9:00:38 PM [express] GET /api/dashboard/my-stats 200 in 304ms
+9:00:38 PM [express] GET /api/dashboard/activity 200 in 328ms
+9:00:38 PM [express] GET /api/dashboard/stats 200 in 292ms

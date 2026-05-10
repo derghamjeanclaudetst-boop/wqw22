@@ -1,0 +1,62 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:33:40 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:33:57 PM [express] GET /api/settings/system 304 in 15ms
+8:33:57 PM [express] GET /api/auth/me 304 in 23ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:33:57 PM [express] GET /api/notifications 200 in 116ms
+8:33:58 PM [express] GET /api/dashboard/stats 200 in 208ms
+8:33:58 PM [express] GET /api/dashboard/activity 200 in 195ms
+8:33:59 PM [express] GET /api/auth/me 304 in 17ms
+8:33:59 PM [express] GET /api/settings/system 304 in 12ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:34:00 PM [express] GET /api/notifications 200 in 64ms
+8:34:01 PM [express] GET /api/clients 200 in 12ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:34:28 PM [express] GET /api/notifications 200 in 10ms
+8:34:29 PM [express] GET /api/dashboard/activity 200 in 194ms
+8:34:29 PM [express] GET /api/dashboard/stats 200 in 199ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:34:58 PM [express] GET /api/notifications 200 in 39ms
+8:34:59 PM [express] GET /api/dashboard/activity 200 in 211ms
+8:34:59 PM [express] GET /api/dashboard/stats 200 in 224ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:35:28 PM [express] GET /api/notifications 200 in 13ms
+8:35:30 PM [express] GET /api/dashboard/activity 200 in 201ms
+8:35:30 PM [express] GET /api/dashboard/stats 200 in 160ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:35:55 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/pages/dashboard.tsx, /src/index.css?v=BNIySf2eHq9-k1iO_q7Rq[22m

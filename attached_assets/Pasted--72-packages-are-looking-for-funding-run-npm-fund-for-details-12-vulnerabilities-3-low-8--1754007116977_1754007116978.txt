@@ -1,0 +1,153 @@
+
+72 packages are looking for funding
+  run `npm fund` for details
+
+12 vulnerabilities (3 low, 8 moderate, 1 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> rest-express@1.0.0 db:push
+> drizzle-kit push
+
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/var/www/workorder-app/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+
++ updated_at column will be created
+--- all columns conflicts in roles table resolved ---
+
+
++ updated_at column will be created
+--- all columns conflicts in users table resolved ---
+
+
++ category column will be created
+
++ requested_by column will be created
+
++ technician_id column will be created
+
++ client_name column will be created
+
++ client_phone column will be created
+
++ client_email column will be created
+
++ country column will be created
+
++ city column will be created
+
++ street column will be created
+
++ zip_code column will be created
+
++ nte column will be created
+
++ tnte column will be created
+
++ estimated_hours column will be created
+
++ actual_hours column will be created
+
++ scheduled_date column will be created
+
++ start_date column will be created
+
++ end_date column will be created
+
++ completed_date column will be created
+
++ urgency column will be created
+
++ equipment_type column will be created
+
++ problem_description column will be created
+
++ special_instructions column will be created
+
++ access_instructions column will be created
+
++ safety_requirements column will be created
+
++ assigned_user_ids column will be created
+
++ client_work_order_number column will be created
+
++ is_locked column will be created
+
++ updated_at column will be created
+--- all columns conflicts in work_orders table resolved ---
+
+
+
+
+
+
+
+
+error: type "serial" does not exist
+    at /var/www/workorder-app/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.query (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:66575:26)
+    at async pgPush (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:70117:13)
+    at async Object.handler (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:79124:9)
+    at async run (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:78381:7) {
+  length: 93,
+  severity: 'ERROR',
+  code: '42704',
+  detail: undefined,
+  hint: undefined,
+  position: '53',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'parse_type.c',
+  line: '270',
+  routine: 'typenameType'
+}
+
+
+
+
+
+/var/www/workorder-app/server/db.ts:9
+  throw new Error(
+        ^
+
+
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+    at <anonymous> (/var/www/workorder-app/server/db.ts:9:9)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8
+
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+/var/www/workorder-app/server/db.ts:9
+  throw new Error(
+        ^
+
+
+Error: DATABASE_URL must be set. Did you forget to provision a database?
+    at <anonymous> (/var/www/workorder-app/server/db.ts:9:9)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)

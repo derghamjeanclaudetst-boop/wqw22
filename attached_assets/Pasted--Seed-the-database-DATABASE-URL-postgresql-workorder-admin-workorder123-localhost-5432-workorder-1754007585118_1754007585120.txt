@@ -1,0 +1,78 @@
+# Seed the database
+DATABASE_URL=postgresql://workorder_admin:workorder123@localhost:5432/workorder_db npx tsx server/seed.ts
+
+# Start the application
+DATABASE_URL=postgresql://workorder_admin:workorder123@localhost:5432/workorder_db npm run dev
+  current_user   | current_database 
+-----------------+------------------
+ workorder_admin | workorder_db
+(1 row)
+
+/var/www/workorder-app/server/db.ts:2
+import { Pool } from "pg";
+         ^
+
+SyntaxError: The requested module 'pg' does not provide an export named 'Pool'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:123:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:191:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+/var/www/workorder-app/server/db.ts:2
+import { Pool } from "pg";
+         ^
+
+SyntaxError: The requested module 'pg' does not provide an export named 'Pool'
+    at ModuleJob._instantiate (node:internal/modules/esm/module_job:123:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:191:5)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8
+root@srv773741:/var/www/workorder-app# cat > server/db.ts << 'EOF'
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
+import * as schema from "../shared/schema.js";
+
+const { Pool } = pg;
+
+if (!process.env.DATABASE_URL) {
+  throw new Error(
+    "DATABASE_URL must be set. Did you forget to provision a database?",
+  );
+}
+
+export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const db = drizzle(pool, { schema });
+EOF
+root@srv773741:/var/www/workorder-app# DATABASE_URL=postgresql://workorder_admin:workorder123@localhost:5432/workorder_db npx tsx server/seed.ts
+root@srv773741:/var/www/workorder-app# DATABASE_URL=postgresql://workorder_admin:workorder123@localhost:5432/workorder_db npm run dev
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+node:internal/errors:496
+    ErrorCaptureStackTrace(err);
+    ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "paths[0]" argument must be of type string. Received undefined
+    at __node_internal_captureLargerStackTrace (node:internal/errors:496:5)
+    at new NodeError (node:internal/errors:405:5)
+    at validateString (node:internal/validators:162:11)
+    at Object.resolve (node:path:1115:7)
+    at <anonymous> (/var/www/workorder-app/vite.config.ts:21:17)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}
+
+Node.js v18.20.8

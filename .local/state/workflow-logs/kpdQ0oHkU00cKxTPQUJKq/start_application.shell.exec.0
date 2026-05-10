@@ -1,0 +1,117 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+9:10:37 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+9:10:46 PM [express] GET /api/settings/system 304 in 13ms
+9:10:46 PM [express] GET /api/auth/me 304 in 27ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:10:46 PM [express] GET /api/notifications 200 in 49ms
+9:10:47 PM [express] GET /api/dashboard/stats 200 in 174ms
+9:10:47 PM [express] GET /api/dashboard/activity 200 in 168ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:11:16 PM [express] GET /api/notifications 200 in 12ms
+9:11:18 PM [express] GET /api/dashboard/stats 200 in 459ms
+9:11:18 PM [express] GET /api/dashboard/activity 200 in 439ms
+9:11:21 PM [express] GET /api/auth/me 401 in 1ms
+9:11:21 PM [express] GET /api/settings/system 304 in 4ms
+9:11:21 PM [express] GET /api/clients 200 in 13ms
+9:11:49 PM [express] GET /api/roles 200 in 86ms
+9:11:49 PM [express] GET /api/users 200 in 46ms
+9:11:49 PM [express] GET /api/permissions 200 in 20ms
+9:11:50 PM [express] GET /api/work-orders 200 in 146ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:11:50 PM [express] GET /api/notifications 200 in 13ms
+9:11:59 PM [express] GET /api/work-orders/12/parts-requests 200 in 28ms
+9:11:59 PM [express] GET /api/work-orders/12/proposal 200 in 33ms
+9:11:59 PM [express] GET /api/technicians 200 in 36ms
+9:11:59 PM [express] GET /api/work-orders/12/files 200 in 35ms
+Fetching payments for work order 12
+Found 0 payments for work order 12: []
+9:11:59 PM [express] GET /api/work-orders/12/payments 200 in 45ms
+9:11:59 PM [express] GET /api/work-orders/12/chats 200 in 57ms
+API: Fetching invoice for work order 12
+API: Found invoice: [90mundefined[39m
+9:11:59 PM [express] GET /api/work-orders/12/invoice 200 in 19ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:12:21 PM [express] GET /api/notifications 200 in 14ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:12:51 PM [express] GET /api/notifications 200 in 71ms
+Creating user with data: {
+  username: [32m'adpp'[39m,
+  email: [32m'sarah.johnson@example.com'[39m,
+  password: [32m'111111111111111111111111111111111'[39m,
+  firstName: [32m'Jeanclaugug'[39m,
+  lastName: [32m'Johnson'[39m,
+  isActive: [33mtrue[39m,
+  roleId: [33m5[39m
+}
+User created: {
+  id: [33m21[39m,
+  username: [32m'adpp'[39m,
+  email: [32m'sarah.johnson@example.com'[39m,
+  password: [32m'$2b$10$inHYw5VbJ/oLLN7P5eofq.zYtPrF4I8aAWc0YZWj8KCT9lNdhL6hG'[39m,
+  firstName: [32m'Jeanclaugug'[39m,
+  lastName: [32m'Johnson'[39m,
+  isActive: [33mtrue[39m,
+  createdAt: [35m2026-05-07T21:13:32.399Z[39m,
+  updatedAt: [35m2026-05-07T21:13:32.399Z[39m
+}
+Assigning role: [33m5[39m
+9:13:32 PM [express] POST /api/users 201 in 111ms
+9:13:32 PM [express] GET /api/users 200 in 42ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:13:34 PM [express] GET /api/notifications 200 in 14ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:14:04 PM [express] GET /api/notifications 200 in 65ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:14:35 PM [express] GET /api/notifications 200 in 27ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:15:05 PM [express] GET /api/notifications 200 in 93ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:15:35 PM [express] GET /api/notifications 200 in 25ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:16:06 PM [express] GET /api/notifications 200 in 54ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:16:36 PM [express] GET /api/notifications 200 in 25ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:17:06 PM [express] GET /api/notifications 200 in 26ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:17:37 PM [express] GET /api/notifications 200 in 30ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:18:07 PM [express] GET /api/notifications 200 in 33ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:18:37 PM [express] GET /api/notifications 200 in 55ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:19:08 PM [express] GET /api/notifications 200 in 25ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:19:38 PM [express] GET /api/notifications 200 in 27ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:20:09 PM [express] GET /api/notifications 200 in 26ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+9:20:39 PM [express] GET /api/notifications 200 in 28ms

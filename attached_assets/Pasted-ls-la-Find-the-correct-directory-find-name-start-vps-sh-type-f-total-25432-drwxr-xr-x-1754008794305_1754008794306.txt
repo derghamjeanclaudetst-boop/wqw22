@@ -1,0 +1,49 @@
+ls -la
+
+# Find the correct directory
+find . -name "start-vps.sh" -type f
+total 25432
+drwxr-xr-x 13 ubuntu ubuntu     4096 Jul 31 22:27 .
+drwxr-xr-x 14 root   root       4096 Jul 31 21:58 ..
+drwxr-xr-x  4 ubuntu ubuntu     4096 Jun 23 02:56 .cache
+drwxr-xr-x  3 ubuntu ubuntu     4096 Jun 22 02:30 .config
+-rw-r--r--  1 ubuntu ubuntu       67 Jun 22 02:10 .gitignore
+drwxr-xr-x  3 ubuntu ubuntu     4096 Jun 22 01:33 .local
+-rw-r--r--  1 ubuntu ubuntu      676 Jul 19 13:34 .replit
+drwxr-xr-x  2 ubuntu ubuntu     4096 Jun 25 22:33 .upm
+-rw-r--r--  1 ubuntu ubuntu       33 Jul 31 22:29 README.md
+drwxr-xr-x  2 ubuntu ubuntu     4096 Jul 24 19:51 attached_assets
+drwxr-xr-x  3 ubuntu ubuntu     4096 Jun 22 02:10 client
+-rw-r--r--  1 ubuntu ubuntu    21771 Jun 25 23:53 complete_database_export.sql
+-rw-r--r--  1 ubuntu ubuntu      459 Jun 22 02:10 components.json
+-rw-r--r--  1 ubuntu ubuntu      131 Jul 29 22:52 cookies.txt
+-rw-r--r--  1 ubuntu ubuntu      325 Jun 22 02:10 drizzle.config.ts
+drwxr-xr-x  2 root   root       4096 Jul 31 21:58 html
+-rw-r--r--  1 ubuntu ubuntu   345396 Jun 25 22:33 package-lock.json
+-rw-r--r--  1 ubuntu ubuntu     3842 Jun 25 22:33 package.json
+-rw-r--r--  1 ubuntu ubuntu       80 Jun 22 02:10 postcss.config.js
+-rw-r--r--  1 ubuntu ubuntu    11484 Jun 25 00:28 postgresql_schema.sql
+-rw-r--r--  1 ubuntu ubuntu     4018 Jul 31 21:43 replit.md
+drwxr-xr-x  3 ubuntu ubuntu     4096 Jul 30 22:58 server
+drwxr-xr-x  2 ubuntu ubuntu     4096 Jul 19 13:34 shared
+-rw-r--r--  1 ubuntu ubuntu     2627 Jun 22 02:10 tailwind.config.ts
+-rw-r--r--  1 ubuntu ubuntu      657 Jun 22 02:10 tsconfig.json
+drwxr-xr-x  7 ubuntu ubuntu     4096 Jul 24 19:41 uploads
+-rw-r--r--  1 ubuntu ubuntu      971 Jun 22 02:10 vite.config.ts
+drwxr-xr-x 12 ubuntu ubuntu     4096 Aug  1 00:22 workorder-app
+-rw-r--r--  1 root   root   25551644 Jul 31 23:57 workorder-vps-deployment.tar.gz
+root@srv773741:/var/www# # Go to the extracted directory (might be named differently)
+cd $(tar -tzf workorder-vps-deployment.tar.gz | head -1 | cut -f1 -d"/")
+
+# Or if that doesn't work, try:
+tar -tzf workorder-vps-deployment.tar.gz | head -10
+./
+./.cache/
+./.cache/replit/
+./.cache/replit/modules/
+./.cache/replit/modules/replit.res
+./.cache/replit/modules/nodejs-20.res
+./.cache/replit/modules/web.res
+./.cache/replit/modules/postgresql-16.res
+./.cache/replit/modules/replit-rtld-loader.res
+./.cache/replit/modules/nodejs-20

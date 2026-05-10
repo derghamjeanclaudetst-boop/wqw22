@@ -1,0 +1,146 @@
+
+📦 Installing dependencies...
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@neondatabase/serverless@1.0.1',
+npm warn EBADENGINE   required: { node: '>=19.0.0' },
+npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'better-sqlite3@12.0.0',
+npm warn EBADENGINE   required: { node: '20.x || 22.x || 23.x || 24.x' },
+npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+npm warn EBADENGINE }
+
+added 440 packages, and audited 441 packages in 2m
+
+60 packages are looking for funding
+  run `npm fund` for details
+
+4 vulnerabilities (3 low, 1 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+🏗️  Building frontend...
+
+> rest-express@1.0.0 build
+> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+
+sh: 1: vite: not found
+❌ Frontend build failed
+root@srv773741:/var/www# # Install Vite locally
+npm install --save-dev vite
+
+# Build the frontend manually
+npx vite build
+
+# If that fails, let's try building without the backend compilation
+npx vite build --outDir dist/public
+
+# Now start the server directly
+echo "🌟 Starting production server..."
+npx tsx server/production.ts
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: '@neondatabase/serverless@1.0.1',
+npm warn EBADENGINE   required: { node: '>=19.0.0' },
+npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'better-sqlite3@12.0.0',
+npm warn EBADENGINE   required: { node: '20.x || 22.x || 23.x || 24.x' },
+npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+npm warn EBADENGINE }
+npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+
+added 97 packages, and audited 538 packages in 4s
+
+72 packages are looking for funding
+  run `npm fund` for details
+
+12 vulnerabilities (3 low, 8 moderate, 1 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+vite v5.4.19 building for production...
+transforming (3) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 2182 modules transformed.
+../dist/public/index.html                   0.63 kB │ gzip:   0.38 kB
+../dist/public/assets/index-y7tVonB_.css   97.93 kB │ gzip:  20.45 kB
+../dist/public/assets/index-Cykc0wOi.js   922.55 kB │ gzip: 253.85 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 6.98s
+vite v5.4.19 building for production...
+transforming (3) src/main.tsxBrowserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 2182 modules transformed.
+dist/public/index.html                   0.63 kB │ gzip:   0.38 kB
+dist/public/assets/index-y7tVonB_.css   97.93 kB │ gzip:  20.45 kB
+dist/public/assets/index-Cykc0wOi.js   922.55 kB │ gzip: 253.85 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 7.22s
+🌟 Starting production server...
+
+node:internal/process/esm_loader:40
+      internalBinding('errors').triggerUncaughtException(
+                                ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/www/server/production.ts' imported from /var/www/
+    at new NodeError (node:internal/errors:405:5)
+    at finalizeResolution (node:internal/modules/esm/resolve:327:11)
+    at moduleResolve (node:internal/modules/esm/resolve:980:10)
+    at defaultResolve (node:internal/modules/esm/resolve:1206:11)
+    at nextResolve (node:internal/modules/esm/hooks:864:28)
+    at resolveBase (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009276175:2:3212)
+    at resolveDirectory (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009276175:2:3584)
+    at resolveTsPaths (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009276175:2:4073)
+    at resolve (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009276175:2:4447)
+    at nextResolve (node:internal/modules/esm/hooks:864:28) {
+  url: 'file:///var/www/server/production.ts',
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v18.20.8
+root@srv773741:/var/www# # Skip the build and run the server directly
+echo "⚡ Starting server without build step..."
+export DATABASE_URL=postgresql://workorder_admin:workorder123@localhost:5432/workorder_db
+export PORT=3000
+export NODE_ENV=production
+npx tsx server/production.ts
+⚡ Starting server without build step...
+
+node:internal/process/esm_loader:40
+      internalBinding('errors').triggerUncaughtException(
+                                ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/www/server/production.ts' imported from /var/www/
+    at new NodeError (node:internal/errors:405:5)
+    at finalizeResolution (node:internal/modules/esm/resolve:327:11)
+    at moduleResolve (node:internal/modules/esm/resolve:980:10)
+    at defaultResolve (node:internal/modules/esm/resolve:1206:11)
+    at nextResolve (node:internal/modules/esm/hooks:864:28)
+    at resolveBase (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009282614:2:3212)
+    at resolveDirectory (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009282614:2:3584)
+    at resolveTsPaths (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009282614:2:4073)
+    at resolve (file:///var/www/node_modules/tsx/dist/esm/index.mjs?1754009282614:2:4447)
+    at nextResolve (node:internal/modules/esm/hooks:864:28) {
+  url: 'file:///var/www/server/production.ts',
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+Node.js v18.20.8

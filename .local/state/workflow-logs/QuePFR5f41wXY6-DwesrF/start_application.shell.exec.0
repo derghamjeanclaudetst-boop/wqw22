@@ -1,0 +1,166 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:19:45 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:20:03 PM [express] GET /api/auth/me 304 in 29ms
+8:20:03 PM [express] GET /api/settings/system 304 in 10ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:20:04 PM [express] GET /api/notifications 200 in 29ms
+8:20:04 PM [express] GET /api/auth/me 401 in 1ms
+8:20:04 PM [express] GET /api/settings/system 304 in 2ms
+8:20:06 PM [express] GET /api/dashboard/stats 200 in 174ms
+8:20:06 PM [express] GET /api/dashboard/activity 200 in 151ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:20:35 PM [express] GET /api/notifications 200 in 44ms
+8:20:36 PM [express] GET /api/dashboard/stats 200 in 211ms
+8:20:36 PM [express] GET /api/dashboard/activity 200 in 181ms
+8:21:54 PM [express] GET /api/auth/me 304 in 20ms
+8:21:54 PM [express] GET /api/settings/system 304 in 9ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:21:56 PM [express] GET /api/notifications 200 in 12ms
+8:21:59 PM [express] GET /api/dashboard/stats 200 in 218ms
+8:21:59 PM [express] GET /api/dashboard/activity 200 in 199ms
+8:22:09 PM [express] GET /api/users 200 in 48ms
+8:22:09 PM [express] GET /api/roles 200 in 49ms
+8:22:10 PM [express] GET /api/permissions 200 in 21ms
+8:22:10 PM [express] GET /api/work-orders 200 in 150ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:22:41 PM [express] GET /api/notifications 200 in 15ms
+8:22:59 PM [express] GET /api/clients 200 in 105ms
+Fetching payments for work order 21
+8:24:21 PM [express] GET /api/work-orders/21/proposal 200 in 88ms
+8:24:21 PM [express] GET /api/technicians 200 in 98ms
+Found 0 payments for work order 21: []
+8:24:22 PM [express] GET /api/work-orders/21/files 200 in 87ms
+8:24:22 PM [express] GET /api/work-orders/21/payments 200 in 100ms
+8:24:22 PM [express] GET /api/work-orders/21/parts-requests 200 in 91ms
+8:24:22 PM [express] GET /api/work-orders/21/chats 200 in 142ms
+API: Fetching invoice for work order 21
+API: Found invoice: [90mundefined[39m
+8:24:22 PM [express] GET /api/work-orders/21/invoice 200 in 18ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:24:41 PM [express] GET /api/notifications 200 in 14ms
+8:24:55 PM [express] POST /api/clients 201 in 19ms
+8:24:55 PM [express] GET /api/clients 200 in 13ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:25:11 PM [express] GET /api/notifications 200 in 13ms
+8:25:28 PM [express] GET /api/payment-requests 200 in 46ms
+8:25:31 PM [express] GET /api/payment-requests 200 in 28ms
+8:25:36 PM [express] GET /api/invoices/all 200 in 114ms
+8:25:36 PM [express] GET /api/parts-requests 200 in 194ms
+8:25:40 PM [express] GET /api/settings/system 200 in 14ms
+8:25:40 PM [express] GET /api/auth/me 200 in 23ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:25:40 PM [express] GET /api/notifications 200 in 10ms
+8:25:43 PM [express] GET /api/clients 200 in 11ms
+8:25:43 PM [express] GET /api/users 200 in 72ms
+8:25:43 PM [express] GET /api/work-orders 200 in 127ms
+Fetching payments for work order 12
+8:25:57 PM [express] GET /api/work-orders/12/proposal 200 in 28ms
+Found 0 payments for work order 12: []
+8:25:57 PM [express] GET /api/work-orders/12/parts-requests 200 in 35ms
+8:25:57 PM [express] GET /api/work-orders/12/payments 200 in 35ms
+8:25:57 PM [express] GET /api/work-orders/12/files 200 in 37ms
+API: Fetching invoice for work order 12
+API: Found invoice: [90mundefined[39m
+8:25:57 PM [express] GET /api/work-orders/12/invoice 200 in 44ms
+8:25:57 PM [express] GET /api/work-orders/12/chats 200 in 71ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:26:11 PM [express] GET /api/notifications 200 in 12ms
+8:26:36 PM [express] GET /api/roles 200 in 77ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:27:07 PM [express] GET /api/notifications 200 in 14ms
+Creating user with data: {
+  username: [32m'JONNY2tec'[39m,
+  email: [32m'sarah.johnson@example.com'[39m,
+  password: [32m'1111'[39m,
+  firstName: [32m'qq'[39m,
+  lastName: [32m'qq'[39m,
+  isActive: [33mtrue[39m,
+  roleId: [33m3[39m
+}
+Error creating user: error: duplicate key value violates unique constraint "users_email_unique"
+    at [90mfile:///home/runner/workspace/[39mnode_modules/[4m@neondatabase/serverless[24m/index.mjs:1087:33
+[90m    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)[39m
+    at async NeonPreparedQuery.execute [90m(/home/runner/workspace/[39mnode_modules/[4msrc[24m/neon-serverless/session.ts:102:18[90m)[39m
+    at async DatabaseStorage.createUser [90m(/home/runner/workspace/[39mserver/storage.ts:150:20[90m)[39m
+    at async <anonymous> [90m(/home/runner/workspace/[39mserver/routes.ts:387:20[90m)[39m {
+  length: [33m223[39m,
+  severity: [32m'ERROR'[39m,
+  code: [32m'23505'[39m,
+  detail: [32m'Key (email)=(sarah.johnson@example.com) already exists.'[39m,
+  hint: [90mundefined[39m,
+  position: [90mundefined[39m,
+  internalPosition: [90mundefined[39m,
+  internalQuery: [90mundefined[39m,
+  where: [90mundefined[39m,
+  schema: [32m'public'[39m,
+  table: [32m'users'[39m,
+  column: [90mundefined[39m,
+  dataType: [90mundefined[39m,
+  constraint: [32m'users_email_unique'[39m,
+  file: [32m'nbtinsert.c'[39m,
+  line: [32m'673'[39m,
+  routine: [32m'_bt_check_unique'[39m
+}
+8:27:16 PM [express] POST /api/users 400 in 114ms
+Creating user with data: {
+  username: [32m'JONNY2tec'[39m,
+  email: [32m'sarah.johnso222n@example.com'[39m,
+  password: [32m'1111'[39m,
+  firstName: [32m'qq333'[39m,
+  lastName: [32m'qq222'[39m,
+  isActive: [33mtrue[39m,
+  roleId: [33m3[39m
+}
+User created: {
+  id: [33m23[39m,
+  username: [32m'JONNY2tec'[39m,
+  email: [32m'sarah.johnso222n@example.com'[39m,
+  password: [32m'$2b$10$TGjQQAIId/RLlxcp2oDD1.k/VlC8O9DrNc2lsuwY3Z6A5wjmIP5By'[39m,
+  firstName: [32m'qq333'[39m,
+  lastName: [32m'qq222'[39m,
+  isActive: [33mtrue[39m,
+  createdAt: [35m2026-05-10T20:27:31.466Z[39m,
+  updatedAt: [35m2026-05-10T20:27:31.466Z[39m
+}
+Assigning role: [33m3[39m
+8:27:31 PM [express] POST /api/users 201 in 88ms
+8:27:31 PM [express] GET /api/users 200 in 42ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:27:37 PM [express] GET /api/notifications 200 in 13ms
+8:27:42 PM [express] POST /api/auth/logout 200 in 45ms
+8:27:50 PM [express] POST /api/auth/login 401 in 62ms
+8:27:55 PM [express] POST /api/auth/login 200 in 75ms
+8:27:56 PM [express] GET /api/dashboard/activity 200 in 188ms
+8:27:56 PM [express] GET /api/dashboard/stats 200 in 209ms
+8:28:07 PM [express] GET /api/technicians 403 in 18ms
+8:28:07 PM [express] GET /api/work-orders/12/proposal 403 in 20ms
+8:28:07 PM [express] GET /api/work-orders/12/payments 403 in 19ms
+8:28:07 PM [express] GET /api/work-orders/12/parts-requests 200 in 24ms
+8:28:07 PM [express] GET /api/work-orders/12/files 200 in 27ms
+8:28:07 PM [express] GET /api/work-orders/12/chats 200 in 51ms
+8:28:07 PM [express] GET /api/work-orders/12/invoice 403 in 13ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:28:42 PM [express] GET /api/notifications 200 in 43ms
+8:28:55 PM [express] GET /api/proposals 403 in 15ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:29:12 PM [express] GET /api/notifications 200 in 10ms

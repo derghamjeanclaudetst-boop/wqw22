@@ -1,0 +1,24 @@
+Add deploy.sh — full VPS deployment script for NOVIQ
+
+Covers every step needed to deploy the app from scratch on a fresh Ubuntu
+22.04/24.04 VPS: database, frontend build, backend compile, PM2, Nginx, firewall.
+
+Sections:
+1. Config prompts — domain/IP, DB creds, app dir, session secret (auto-generated)
+2. System packages — Node.js 20 LTS, PostgreSQL, Nginx, Git, UFW, PM2
+3. PostgreSQL — idempotent create user/db, schema-level grants (PG 15+ compatible)
+4. App files — git clone OR rsync from local (skips node_modules/dist/.git)
+5. DB driver patch — replaces server/db.ts with standard pg/TCP driver because
+   @neondatabase/serverless uses WebSocket and won't work with local PostgreSQL
+6. .env — DATABASE_URL, NODE_ENV=production, SESSION_SECRET (chmod 600)
+7. Build — npm install + pg/drizzle-orm/node-postgres, patches vite.config.ts
+   to strip Replit-only plugins, Vite frontend build + esbuild backend compile
+8. Schema — drizzle-kit push --force on fresh DB, creates session store table;
+   seed runs automatically via seedDatabase() on first start
+9. PM2 — ecosystem.config.cjs pointing to dist/index.js (compiled, not tsx),
+   saves process list, enables systemd startup on reboot
+10. Nginx — reverse proxy with WebSocket support, 50MB upload limit,
+    /uploads/ alias, security headers, removes default site
+11. UFW firewall — allows SSH + Nginx port + 443; port 5000 stays internal
+12. Health check + summary — URL, default credentials, useful commands,
+    Let's Encrypt instructions

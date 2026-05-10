@@ -1,0 +1,52 @@
+PETRODEALHUB
+Maritime Oil Brokerage & Logistics Platform
+
+VESSEL INSPECTION CERTIFICATE
+
+Vessel: Sea Transporter 461
+IMO: IMO9541217
+Generated: 6/12/2025
+Time: 11:47:24 PM
+
+
+EXECUTIVE SUMMARY
+=================
+
+[object Object]
+
+
+VESSEL TECHNICAL SPECIFICATIONS
+===============================
+
+[object Object],[object Object],[object Object],[object Object]
+
+
+SAFETY & REGULATORY COMPLIANCE
+==============================
+
+[object Object],[object Object],[object Object],[object Object],[object Object]
+
+
+CURRENT OPERATIONAL STATUS
+==========================
+
+[object Object],[object Object],[object Object],[object Object]
+
+
+COMMERCIAL & MARKET INFORMATION
+===============================
+
+[object Object],[object Object],[object Object]
+
+
+DOCUMENT SPECIFIC INFORMATION
+=============================
+
+[object Object]
+
+
+CERTIFICATION & AUTHORIZATION
+=============================
+
+[object Object],[object Object],[object Object]
+

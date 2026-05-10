@@ -1,0 +1,105 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:40:18 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:40:23 PM [express] GET /api/settings/system 304 in 13ms
+8:40:23 PM [express] GET /api/auth/me 304 in 19ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:40:24 PM [express] GET /api/notifications 200 in 64ms
+8:40:29 PM [express] GET /api/auth/me 401 in 1ms
+8:40:29 PM [express] GET /api/settings/system 304 in 2ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:40:54 PM [express] GET /api/notifications 200 in 40ms
+8:41:20 PM [express] GET /api/settings/system 304 in 9ms
+8:41:20 PM [express] GET /api/auth/me 304 in 28ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:41:20 PM [express] GET /api/notifications 200 in 11ms
+8:41:22 PM [express] GET /api/parts-requests 403 in 16ms
+8:41:22 PM [express] GET /api/work-orders 200 in 26ms
+8:41:22 PM [express] GET /api/proposals 403 in 13ms
+8:41:26 PM [express] POST /api/auth/logout 200 in 7ms
+8:41:36 PM [express] POST /api/auth/login 200 in 79ms
+8:41:36 PM [express] GET /api/dashboard/my-stats 200 in 284ms
+8:41:36 PM [express] GET /api/dashboard/activity 200 in 287ms
+8:41:36 PM [express] GET /api/dashboard/stats 200 in 292ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:41:54 PM [express] GET /api/notifications 200 in 12ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:42:20 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx?v=EPt8-Mmevh-ItsSINBG_9, /src/index.css?v=EPt8-Mmevh-ItsSINBG_9, /src/hooks/use-auth.tsx, /src/components/layout/sidebar.tsx, /src/components/notifications/notification-dropdown.tsx[22m
+[2m8:42:21 PM[22m [36m[1m[vite][22m[39m [33mhmr invalidate [39m[2m/src/hooks/use-auth.tsx[22m Could not Fast Refresh ("useAuth" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:42:21 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/App.tsx?v=EPt8-Mmevh-ItsSINBG_9, /src/index.css?v=EPt8-Mmevh-ItsSINBG_9, /src/components/layout/main-layout.tsx, /src/pages/login.tsx, /src/components/layout/sidebar.tsx, /src/hooks/use-permissions.tsx, /src/pages/dashboard.tsx, /src/components/rbac/advanced-permission-guard.tsx[22m
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:42:22 PM [express] GET /api/notifications 200 in 52ms
+8:42:22 PM [express] GET /api/auth/me 200 in 49ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:42:22 PM [express] GET /api/notifications 200 in 12ms
+8:42:22 PM [express] GET /api/auth/me 200 in 28ms
+[2m8:42:22 PM[22m [36m[1m[vite][22m[39m [33mhmr invalidate [39m[2m/src/components/rbac/advanced-permission-guard.tsx[22m Could not Fast Refresh ("useAdvancedPermissions" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:42:22 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/index.css?v=EPt8-Mmevh-ItsSINBG_9, /src/pages/dashboard.tsx[22m
+8:42:23 PM [express] GET /api/dashboard/activity 200 in 321ms
+8:42:23 PM [express] GET /api/dashboard/my-stats 200 in 321ms
+8:42:23 PM [express] GET /api/dashboard/stats 200 in 327ms
+8:42:23 PM [express] GET /api/dashboard/stats 200 in 170ms
+8:42:23 PM [express] GET /api/dashboard/my-stats 200 in 173ms
+8:42:23 PM [express] GET /api/dashboard/activity 200 in 181ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:42:52 PM [express] GET /api/notifications 200 in 34ms
+8:42:53 PM [express] GET /api/dashboard/my-stats 200 in 186ms
+8:42:53 PM [express] GET /api/dashboard/activity 200 in 212ms
+8:42:53 PM [express] GET /api/dashboard/stats 200 in 217ms
+8:43:01 PM [express] PATCH /api/notifications/2/read 200 in 431ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:43:02 PM [express] GET /api/notifications 200 in 179ms
+8:43:04 PM [express] GET /api/clients 200 in 15ms
+8:43:04 PM [express] GET /api/users 200 in 75ms
+8:43:04 PM [express] GET /api/work-orders 200 in 136ms
+8:43:07 PM [express] GET /api/technicians 200 in 17ms
+8:43:07 PM [express] GET /api/work-orders/11/proposal 200 in 20ms
+8:43:07 PM [express] GET /api/work-orders/11/parts-requests 200 in 23ms
+8:43:07 PM [express] GET /api/work-orders/11/files 200 in 19ms
+Fetching payments for work order 11
+Found 0 payments for work order 11: []
+8:43:07 PM [express] GET /api/work-orders/11/payments 200 in 15ms
+8:43:07 PM [express] GET /api/work-orders/11/chats 200 in 45ms
+API: Fetching invoice for work order 11
+API: Found invoice: [90mundefined[39m
+8:43:08 PM [express] GET /api/work-orders/11/invoice 200 in 26ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:43:32 PM [express] GET /api/notifications 200 in 15ms

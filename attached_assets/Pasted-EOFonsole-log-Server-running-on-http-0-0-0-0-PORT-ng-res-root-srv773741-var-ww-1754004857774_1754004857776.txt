@@ -1,0 +1,163 @@
+EOFonsole.log(`Server running on http://0.0.0.0:${PORT}`);ng() });res) => {;
+root@srv773741:/var/www/workorder-app# cat > server/db.ts << 'EOF'
+import { drizzle } from "drizzle-orm/neon-serverless";
+import { neon } from "@neondatabase/serverless";
+import * as schema from "../shared/schema.js";
+
+const connectionString = process.env.DATABASE_URL!;
+const sql = neon(connectionString);
+export const db = drizzle(sql, { schema });
+EOF
+root@srv773741:/var/www/workorder-app# ls -la
+ls -la server/
+ls -la shared/
+total 172
+drwxr-xr-x   8 root root   4096 Jul 31 23:30 .
+drwxr-xr-x   4 root root   4096 Jul 31 22:23 ..
+-rw-r--r--   1 root root    180 Jul 31 23:30 .env
+drwxr-xr-x   3 root root   4096 Jul 31 23:26 client
+-rw-r--r--   1 root root    216 Jul 31 23:30 drizzle.config.ts
+drwxr-xr-x   2 root root   4096 Jul 31 22:40 logs
+drwxr-xr-x 122 root root   4096 Jul 31 23:29 node_modules
+-rw-r--r--   1 root root 123966 Jul 31 23:29 package-lock.json
+-rw-r--r--   1 root root    806 Jul 31 23:28 package.json
+drwxr-xr-x   2 root root   4096 Jul 31 23:33 server
+drwxr-xr-x   2 root root   4096 Jul 31 23:32 shared
+-rw-r--r--   1 root root    605 Jul 31 23:30 tsconfig.json
+drwxr-xr-x   8 root root   4096 Jul 31 22:41 uvg-cmms
+total 16
+drwxr-xr-x 2 root root 4096 Jul 31 23:33 .
+drwxr-xr-x 8 root root 4096 Jul 31 23:30 ..
+-rw-r--r-- 1 root root  284 Jul 31 23:33 db.ts
+-rw-r--r-- 1 root root 3065 Jul 31 23:32 index.ts
+total 12
+drwxr-xr-x 2 root root 4096 Jul 31 23:32 .
+drwxr-xr-x 8 root root 4096 Jul 31 23:30 ..
+-rw-r--r-- 1 root root 3447 Jul 31 23:32 schema.ts
+root@srv773741:/var/www/workorder-app# npm run db:push
+
+> workorder-app@1.0.0 db:push
+> drizzle-kit push
+
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/var/www/workorder-app/drizzle.config.ts'
+Using '@neondatabase/serverless' driver for database querying
+ Warning  '@neondatabase/serverless' can only connect to remote Neon/Vercel Postgres/Supabase instances through a websocket
+[⣷] Pulling schema from database...
+ErrorEvent {
+  [Symbol(kTarget)]: _WebSocket {
+    _events: [Object: null prototype] {
+      error: [Function],
+      message: [Function],
+      close: [Function],
+      open: [Function]
+    },
+    _eventsCount: 4,
+    _maxListeners: undefined,
+    _binaryType: 'arraybuffer',
+    _closeCode: 1006,
+    _closeFrameReceived: false,
+    _closeFrameSent: false,
+    _closeMessage: <Buffer >,
+    _closeTimer: null,
+    _extensions: {},
+    _paused: false,
+    _protocol: '',
+    _readyState: 3,
+    _receiver: null,
+    _sender: null,
+    _socket: null,
+    _bufferedAmount: 0,
+    _isServer: false,
+    _redirects: 0,
+    _autoPong: true,
+    _url: 'wss://localhost/v2',
+    _req: null,
+    [Symbol(kCapture)]: false
+  },
+  [Symbol(kType)]: 'error',
+  [Symbol(kError)]: Error: connect ECONNREFUSED ::1:443
+      at __node_internal_captureLargerStackTrace (node:internal/errors:496:5)
+      at __node_internal_exceptionWithHostPort (node:internal/errors:671:12)
+      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1555:16) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '::1',
+    port: 443
+  },
+  [Symbol(kMessage)]: 'connect ECONNREFUSED ::1:443'
+}
+root@srv773741:/var/www/workorder-app# cat > server/seed.ts << 'EOF'
+import bcrypt from "bcrypt";
+import { db } from "./db.js";
+import { users, roles } from "../shared/schema.js";
+
+async function seed() {
+  try {
+    console.log("Creating roles...");
+    
+    // Create admin role
+    const [adminRole] = await db.insert(roles).values({
+      name: "admin",
+      description: "Administrator with full access",
+      permissions: ["*"]
+    }).returning();
+
+    // Create manager role
+    const [managerRole] = await db.insert(roles).values({
+      name: "manager",
+      description: "Manager with limited access",
+      permissions: ["workorders.view_all", "users.view", "dashboard.view"]
+    }).returning();
+
+    // Create technician role
+    const [techRole] = await db.insert(roles).values({
+      name: "technician",
+      description: "Technician with work order access",
+      permissions: ["workorders.view_assigned", "dashboard.view"]
+    }).returning();
+
+    console.log("Creating users...");
+    
+    // Create admin user
+    const hashedPassword = await bcrypt.hash("admin123", 10);
+    await db.insert(users).values({
+      username: "admin",
+      email: "admin@workorder.com",
+      password: hashedPassword,
+      firstName: "Admin",
+      lastName: "User",
+EOFd();cess.exit(1);rror seeding database:", error);
+root@srv773741:/var/www/workorder-app# npx tsx server/seed.ts
+file:///var/www/workorder-app/node_modules/@neondatabase/serverless/index.mjs:1270
+authToken:u,disableWarningInBrowsers:c}={}){if(!r)throw new Error("No database connection string was\
+                                                        ^
+
+Error: No database connection string was provided to `neon()`. Perhaps an environment variable has not been set?
+    at neon (file:///var/www/workorder-app/node_modules/@neondatabase/serverless/index.mjs:1270:57)
+    at <anonymous> (/var/www/workorder-app/server/db.ts:6:13)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8
+root@srv773741:/var/www/workorder-app# npm run dev
+
+> workorder-app@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+file:///var/www/workorder-app/node_modules/@neondatabase/serverless/index.mjs:1270
+authToken:u,disableWarningInBrowsers:c}={}){if(!r)throw new Error("No database connection string was\
+                                                        ^
+
+Error: No database connection string was provided to `neon()`. Perhaps an environment variable has not been set?
+    at neon (file:///var/www/workorder-app/node_modules/@neondatabase/serverless/index.mjs:1270:57)
+    at <anonymous> (/var/www/workorder-app/server/db.ts:6:13)
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:337:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+
+Node.js v18.20.8

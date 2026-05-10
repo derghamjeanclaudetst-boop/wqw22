@@ -1,0 +1,112 @@
+added 15 packages, removed 11 packages, changed 1 package, and audited 154 packages in 1s
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+root@srv773741:/var/www/workorder-app# cat > server/index.ts << 'EOF'
+import express from "express";
+import session from "express-session";
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcrypt";
+import pg from "pg";
+import connectPgSimple from "connect-pg-simple";
+import { db } from "./db.js";
+import { users, roles } from "../shared/schema.js";
+import { eq } from "drizzle-orm";
+
+const { Pool } = pg;
+const PgSession = connectPgSimple(session);
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Database pool for sessions
+const pgPool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Session configuration
+app.use(session({
+  store: new PgSession({
+    pool: pgPool,
+    tableName: 'session'
+  }),
+  secret: process.env.SESSION_SECRET || 'fallback-secret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
+EOFonsole.log(`Server running on http://0.0.0.0:${PORT}`);ng() });res) => {;
+root@srv773741:/var/www/workorder-app# npm install
+npm run db:push
+npx tsx server/seed.ts
+npm run dev
+
+up to date, audited 154 packages in 906ms
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+4 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> workorder-app@1.0.0 db:push
+> drizzle-kit push
+
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/var/www/workorder-app/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+error: permission denied for schema public
+    at /var/www/workorder-app/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.query (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:78355:26)
+    at async pgPush (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:81944:13)
+    at async Object.handler (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:92168:9)
+    at async run (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:91408:7) {
+  length: 99,
+  severity: 'ERROR',
+  code: '42501',
+  detail: undefined,
+  hint: undefined,
+  position: '14',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'aclchk.c',
+  line: '2812',
+  routine: 'aclcheck_error'
+}
+Creating roles...
+Error seeding database: Error: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string
+    at /var/www/workorder-app/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at <anonymous> (/var/www/workorder-app/node_modules/src/node-postgres/session.ts:104:19)
+    at seed (/var/www/workorder-app/server/seed.ts:10:25)
+
+> workorder-app@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+Server running on http://0.0.0.0:3000

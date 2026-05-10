@@ -1,0 +1,43 @@
+[PM2][ERROR] File ecosystem.config.js malformated
+Error [ERR_REQUIRE_ESM]: require() of ES Module /var/www/cmms-app/ecosystem.config.js from /usr/lib/node_modules/pm2/lib/Common.js not supported.
+ecosystem.config.js is treated as an ES module file as it is a .js file whose nearest parent package.json contains "type": "module" which declares all .js files in that package scope as ES modules.
+Instead either rename ecosystem.config.js to end in .cjs, change the requiring code to use dynamic import() which is available in all CommonJS modules, or change "type": "module" to "type": "commonjs" in /var/www/cmms-app/package.json to treat all .js files as CommonJS (using .mjs for all ES modules instead).
+
+    at Common.parseConfig (/usr/lib/node_modules/pm2/lib/Common.js:331:12)
+    at API._startJson (/usr/lib/node_modules/pm2/lib/API.js:934:25)
+    at API.start (/usr/lib/node_modules/pm2/lib/API.js:329:12)
+    at /usr/lib/node_modules/pm2/lib/binaries/CLI.js:297:13
+    at /usr/lib/node_modules/pm2/node_modules/async/internal/withoutIndex.js:8:40
+    at replenish (/usr/lib/node_modules/pm2/node_modules/async/internal/eachOfLimit.js:81:17)
+    at /usr/lib/node_modules/pm2/node_modules/async/internal/eachOfLimit.js:86:9
+    at eachLimit (/usr/lib/node_modules/pm2/node_modules/async/forEachLimit.js:47:45)
+    at awaitable (/usr/lib/node_modules/pm2/node_modules/async/internal/awaitify.js:14:28)
+    at Command.<anonymous> (/usr/lib/node_modules/pm2/lib/binaries/CLI.js:296:7)
+    at Command.listener (/usr/lib/node_modules/pm2/node_modules/commander/index.js:315:8)
+    at Command.emit (node:events:517:28)
+    at Command.parseArgs (/usr/lib/node_modules/pm2/node_modules/commander/index.js:651:12)
+    at Command.parse (/usr/lib/node_modules/pm2/node_modules/commander/index.js:474:21)
+    at beginCommandProcessing (/usr/lib/node_modules/pm2/lib/binaries/CLI.js:154:13)
+    at /usr/lib/node_modules/pm2/lib/binaries/CLI.js:228:7
+    at /usr/lib/node_modules/pm2/lib/API.js:187:16
+    at /usr/lib/node_modules/pm2/lib/API/Modules/Modularizer.js:79:19
+    at wrapper (/usr/lib/node_modules/pm2/node_modules/async/internal/once.js:12:16)
+    at replenish (/usr/lib/node_modules/pm2/node_modules/async/internal/eachOfLimit.js:76:25)
+    at /usr/lib/node_modules/pm2/node_modules/async/internal/eachOfLimit.js:86:9
+    at eachLimit (/usr/lib/node_modules/pm2/node_modules/async/eachLimit.js:47:45)
+    at awaitable (/usr/lib/node_modules/pm2/node_modules/async/internal/awaitify.js:14:28)
+    at launchTARModules (/usr/lib/node_modules/pm2/lib/API/Modules/Modularizer.js:76:5)
+    at /usr/lib/node_modules/pm2/lib/API/Modules/Modularizer.js:68:7
+    at wrapper (/usr/lib/node_modules/pm2/node_modules/async/internal/once.js:12:16)
+    at replenish (/usr/lib/node_modules/pm2/node_modules/async/internal/eachOfLimit.js:76:25)
+    at /usr/lib/node_modules/pm2/node_modules/async/internal/eachOfLimit.js:86:9
+    at eachLimit (/usr/lib/node_modules/pm2/node_modules/async/eachLimit.js:47:45)
+    at awaitable (/usr/lib/node_modules/pm2/node_modules/async/internal/awaitify.js:14:28)
+    at launchNPMModules (/usr/lib/node_modules/pm2/lib/API/Modules/Modularizer.js:65:5)
+    at Modularizer.launchModules (/usr/lib/node_modules/pm2/lib/API/Modules/Modularizer.js:83:3)
+    at CLI.launchAll (/usr/lib/node_modules/pm2/lib/API/Modules/index.js:50:17)
+    at /usr/lib/node_modules/pm2/lib/API.js:186:12
+    at /usr/lib/node_modules/pm2/lib/Client.js:114:16
+    at Timeout._onTimeout (/usr/lib/node_modules/pm2/lib/Client.js:369:9) {
+  code: 'ERR_REQUIRE_ESM'
+}

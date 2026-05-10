@@ -1,0 +1,92 @@
+       CPU: 21ms
+
+Aug 01 01:02:13 srv773741 nginx[776223]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Aug 01 01:02:13 srv773741 nginx[776223]: nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+Aug 01 01:02:14 srv773741 nginx[776223]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Aug 01 01:02:14 srv773741 nginx[776223]: nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+Aug 01 01:02:14 srv773741 nginx[776223]: nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+Aug 01 01:02:14 srv773741 nginx[776223]: nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
+Aug 01 01:02:15 srv773741 nginx[776223]: nginx: [emerg] still could not bind()
+Aug 01 01:02:15 srv773741 systemd[1]: nginx.service: Control process exited, code=exited, status=1/FAILURE
+Aug 01 01:02:15 srv773741 systemd[1]: nginx.service: Failed with result 'exit-code'.
+Aug 01 01:02:15 srv773741 systemd[1]: Failed to start nginx.service - A high performance web server and a reverse proxy server.
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Enter email address (used for urgent renewal and security notices)
+ (Enter 'c' to cancel): c
+An e-mail address or --register-unsafely-without-email must be provided.
+Ask for help or search for solutions at https://community.letsencrypt.org. See the logfile /var/log/letsencrypt/letsencrypt.log or re-run Certbot with -v for more details.
+root@srv773741:/var/www# # Check what's using port 80
+sudo netstat -tulpn | grep :80
+
+# Kill any processes using port 80 (if safe to do so)
+sudo lsof -ti:80 | xargs sudo kill -9
+
+# Or use alternative approach - configure Nginx on a different port
+sudo rm /etc/nginx/sites-enabled/cmms-test.com
+
+# Create new configuration on port 8080
+sudo cat > /etc/nginx/sites-available/cmms-test.com << 'EOF'
+server {
+    listen 8080;
+    server_name cmms-test.com www.cmms-test.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+EOF
+
+# Enable the site
+sudo ln -s /etc/nginx/sites-available/cmms-test.com /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl start nginx
+sudo systemctl status nginx
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      725473/docker-proxy 
+tcp6       0      0 :::80                   :::*                    LISTEN      725481/docker-proxy 
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: active (running) since Fri 2025-08-01 01:03:22 UTC; 32ms ago
+       Docs: man:nginx(8)
+    Process: 776582 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 776583 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+   Main PID: 776585 (nginx)
+      Tasks: 9 (limit: 38470)
+     Memory: 6.5M (peak: 6.9M)
+        CPU: 60ms
+     CGroup: /system.slice/nginx.service
+             ├─776585 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             ├─776586 "nginx: worker process"
+             ├─776587 "nginx: worker process"
+             ├─776588 "nginx: worker process"
+             ├─776589 "nginx: worker process"
+             ├─776590 "nginx: worker process"
+             ├─776591 "nginx: worker process"
+             ├─776592 "nginx: worker process"
+             └─776593 "nginx: worker process"
+
+Aug 01 01:03:22 srv773741 systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Aug 01 01:03:22 srv773741 systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.
+root@srv773741:/var/www# # See what's using port 80
+sudo netstat -tulpn | grep :80
+
+# If it's Apache, stop it:
+sudo systemctl stop apache2
+sudo systemctl disable apache2
+
+# Then try starting Nginx again
+sudo systemctl start nginx
+tcp        0      0 0.0.0.0:8080            0.0.0.0:*               LISTEN      776585/nginx: maste 
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      776585/nginx: maste 
+tcp6       0      0 :::80                   :::*                    LISTEN      776585/nginx: maste 
+Failed to stop apache2.service: Unit apache2.service not loaded.
+Failed to disable unit: Unit file apache2.service does not exist.

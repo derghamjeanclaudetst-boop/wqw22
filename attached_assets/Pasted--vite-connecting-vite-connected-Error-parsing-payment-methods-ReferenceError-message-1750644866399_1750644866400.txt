@@ -1,0 +1,14 @@
+[vite] connecting...
+[vite] connected.
+Error parsing payment methods: 
+ReferenceError {}
+message: "getPaymentMethodIcon is not defined"
+stack: "ReferenceError: getPaymentMethodIcon is not defined↵ at https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/pages/technicians.tsx:376:223↵ at Array.map (<anonymous>)↵ at https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/pages/technicians.tsx:375:213↵ at https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/pages/technicians.tsx:412:17↵ at Array.map (<anonymous>)↵ at Technicians (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/src/pages/technicians.tsx:168:229)↵ at renderWithHooks (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=8ef32650:11548:26)↵ at updateFunctionComponent (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=8ef32650:14582:28)↵ at beginWork (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=8ef32650:15924:22)↵ at beginWork$1 (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-RPCDYKBN.js?v=8ef32650:19753:22)"
+get stack: ƒ ()
+set stack: ƒ ()
+[[Prototype]]: Object
+
+at t.value (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://4fdcdbfd-5d86-453c-ba80-1785d6d61254-00-33no0xn96h3j.spock.replit.dev/__replco/static/devtools/eruda

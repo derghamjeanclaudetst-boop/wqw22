@@ -1,0 +1,160 @@
+ proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+EOF
+
+# Enable the site
+sudo ln -s /etc/nginx/sites-available/cmms-test.com /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+Hit:1 http://fr.archive.ubuntu.com/ubuntu noble InRelease
+Hit:2 https://download.docker.com/linux/ubuntu noble InRelease                                                               
+Get:3 http://fr.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]                                                   
+Hit:4 https://repository.monarx.com/repository/ubuntu-noble noble InRelease                                                             
+Hit:5 https://deb.nodesource.com/node_18.x nodistro InRelease                                                                           
+Get:6 http://fr.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]                                      
+Get:7 http://fr.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Hit:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:9 http://archive.ubuntu.com/ubuntu noble InRelease
+Get:10 http://archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Get:11 http://fr.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1313 kB]
+Get:12 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:13 http://fr.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [164 kB]
+Get:14 http://fr.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1116 kB]
+Get:15 http://fr.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [377 kB]
+Get:16 http://fr.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Get:17 http://fr.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:18 http://fr.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7088 B]
+Get:19 http://fr.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [28.4 kB]
+Get:20 http://fr.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [216 B]
+Get:21 http://fr.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Get:22 http://fr.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1054 kB]
+Get:23 http://fr.archive.ubuntu.com/ubuntu noble-security/main Translation-en [183 kB]
+Get:24 http://fr.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [21.6 kB]
+Get:25 http://fr.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [52.2 kB]
+Get:26 http://fr.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1560 kB]
+Get:27 http://fr.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [342 kB]
+Get:28 http://fr.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+Get:29 http://fr.archive.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+Get:30 http://archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1054 kB]
+Get:31 http://archive.ubuntu.com/ubuntu noble-security/main Translation-en [183 kB]
+Get:32 http://archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1560 kB]
+Get:33 http://archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [342 kB]
+Get:34 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1313 kB]
+Get:35 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1116 kB]
+Fetched 12.4 MB in 2s (5268 kB/s)                           
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+nginx is already the newest version (1.24.0-2ubuntu7.4).
+The following package was automatically installed and is no longer required:
+  libltdl7
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded.
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+nginx.service is not active, cannot reload.
+root@srv773741:/var/www# # Install Certbot for free SSL
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx -d cmms-test.com -d www.cmms-test.com
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following package was automatically installed and is no longer required:
+  libltdl7
+Use 'sudo apt autoremove' to remove it.
+The following additional packages will be installed:
+  python3-acme python3-certbot python3-configargparse python3-icu python3-josepy python3-parsedatetime python3-rfc3339
+Suggested packages:
+  python-certbot-doc python3-certbot-apache python-acme-doc python-certbot-nginx-doc
+The following NEW packages will be installed:
+  certbot python3-acme python3-certbot python3-certbot-nginx python3-configargparse python3-icu python3-josepy python3-parsedatetime python3-rfc3339
+0 upgraded, 9 newly installed, 0 to remove and 3 not upgraded.
+Need to get 1097 kB of archives.
+After this operation, 5699 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-josepy all 1.14.0-1 [22.1 kB]
+Get:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-rfc3339 all 1.1-4 [6744 B]
+Get:3 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-acme all 2.9.0-1 [48.5 kB]
+Get:4 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-configargparse all 1.7-1 [31.7 kB]
+Get:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-parsedatetime all 2.6-3 [32.8 kB]
+Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-certbot all 2.9.0-1 [267 kB]
+Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 certbot all 2.9.0-1 [89.2 kB]
+Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 python3-certbot-nginx all 2.9.0-1 [66.0 kB]
+Get:9 http://archive.ubuntu.com/ubuntu noble/main amd64 python3-icu amd64 2.12-1build2 [534 kB]
+Fetched 1097 kB in 1s (1293 kB/s)   
+Preconfiguring packages ...
+Selecting previously unselected package python3-josepy.
+(Reading database ... 116597 files and directories currently installed.)
+Preparing to unpack .../0-python3-josepy_1.14.0-1_all.deb ...
+Unpacking python3-josepy (1.14.0-1) ...
+Selecting previously unselected package python3-rfc3339.
+Preparing to unpack .../1-python3-rfc3339_1.1-4_all.deb ...
+Unpacking python3-rfc3339 (1.1-4) ...
+Selecting previously unselected package python3-acme.
+Preparing to unpack .../2-python3-acme_2.9.0-1_all.deb ...
+Unpacking python3-acme (2.9.0-1) ...
+Selecting previously unselected package python3-configargparse.
+Preparing to unpack .../3-python3-configargparse_1.7-1_all.deb ...
+Unpacking python3-configargparse (1.7-1) ...
+Selecting previously unselected package python3-parsedatetime.
+Preparing to unpack .../4-python3-parsedatetime_2.6-3_all.deb ...
+Unpacking python3-parsedatetime (2.6-3) ...
+Selecting previously unselected package python3-certbot.
+Preparing to unpack .../5-python3-certbot_2.9.0-1_all.deb ...
+Unpacking python3-certbot (2.9.0-1) ...
+Selecting previously unselected package certbot.
+Preparing to unpack .../6-certbot_2.9.0-1_all.deb ...
+Unpacking certbot (2.9.0-1) ...
+Selecting previously unselected package python3-certbot-nginx.
+Preparing to unpack .../7-python3-certbot-nginx_2.9.0-1_all.deb ...
+Unpacking python3-certbot-nginx (2.9.0-1) ...
+Selecting previously unselected package python3-icu.
+Preparing to unpack .../8-python3-icu_2.12-1build2_amd64.deb ...
+Unpacking python3-icu (2.12-1build2) ...
+Setting up python3-configargparse (1.7-1) ...
+Setting up python3-parsedatetime (2.6-3) ...
+Setting up python3-icu (2.12-1build2) ...
+Setting up python3-josepy (1.14.0-1) ...
+Setting up python3-rfc3339 (1.1-4) ...
+Setting up python3-acme (2.9.0-1) ...
+Setting up python3-certbot (2.9.0-1) ...
+Setting up certbot (2.9.0-1) ...
+Created symlink /etc/systemd/system/timers.target.wants/certbot.timer → /usr/lib/systemd/system/certbot.timer.
+Setting up python3-certbot-nginx (2.9.0-1) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Scanning processes...                                                                                                                                                       
+Scanning candidates...                                                                                                                                                      
+Scanning linux images...                                                                                                                                                    
+
+Pending kernel upgrade!
+Running kernel version:
+  6.8.0-55-generic
+Diagnostics:
+  The currently running kernel version is not the expected kernel version 6.8.0-71-generic.
+
+Restarting the system to load the new kernel will not be handled automatically, so you should consider rebooting.
+
+Restarting services...
+
+Service restarts being deferred:
+ /etc/needrestart/restart.d/dbus.service
+ systemctl restart getty@tty1.service
+ systemctl restart serial-getty@ttyS0.service
+ systemctl restart systemd-logind.service
+ systemctl restart unattended-upgrades.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Enter email address (used for urgent renewal and security notices)

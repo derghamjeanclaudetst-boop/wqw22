@@ -1,0 +1,65 @@
+> drizzle-kit push
+
+No config path provided, using default 'drizzle.config.ts'
+Reading config file '/var/www/workorder-app/drizzle.config.ts'
+Using 'pg' driver for database querying
+[✓] Pulling schema from database...
+error: permission denied for schema public
+    at /var/www/workorder-app/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Object.query (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:78355:26)
+    at async pgPush (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:81944:13)
+    at async Object.handler (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:92168:9)
+    at async run (/var/www/workorder-app/node_modules/drizzle-kit/bin.cjs:91408:7) {
+  length: 99,
+  severity: 'ERROR',
+  code: '42501',
+  detail: undefined,
+  hint: undefined,
+  position: '14',
+  internalPosition: undefined,
+  internalQuery: undefined,
+  where: undefined,
+  schema: undefined,
+  table: undefined,
+  column: undefined,
+  dataType: undefined,
+  constraint: undefined,
+  file: 'aclchk.c',
+  line: '2812',
+  routine: 'aclcheck_error'
+}
+root@srv773741:/var/www/workorder-app# npx tsx server/seed.ts
+Creating roles...
+Error seeding database: Error: SASL: SCRAM-SERVER-FIRST-MESSAGE: client password must be a string
+    at /var/www/workorder-app/node_modules/pg-pool/index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at <anonymous> (/var/www/workorder-app/node_modules/src/node-postgres/session.ts:104:19)
+    at seed (/var/www/workorder-app/server/seed.ts:10:25)
+root@srv773741:/var/www/workorder-app# npm run dev
+
+> workorder-app@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+Server running on http://0.0.0.0:3000
+^C
+root@srv773741:/var/www/workorder-app# sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE workorder_db TO workorder_user;"
+sudo -u postgres psql -c "GRANT ALL ON SCHEMA public TO workorder_user;" workorder_db
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO workorder_user;" workorder_db
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO workorder_user;" workorder_db
+sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO workorder_user;" workorder_db
+sudo -u postgres psql -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO workorder_user;" workorder_db
+GRANT
+GRANT
+GRANT
+GRANT
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+root@srv773741:/var/www/workorder-app# cat > .env << 'EOF'
+NODE_ENV=production
+DATABASE_URL=postgresql://workorder_user:uvg@2025@@localhost:5432/workorder_db
+SESSION_SECRET=your-super-secret-session-key-change-this-in-production
+PORT=3000
+EOF
+root@srv773741:/var/www/workorder-app# psql postgresql://workorder_user:uvg@2025@@localhost:5432/workorder_db -c "SELECT current_user, current_database();"
+psql: error: could not translate host name "2025@@localhost" to address: Name or service not known

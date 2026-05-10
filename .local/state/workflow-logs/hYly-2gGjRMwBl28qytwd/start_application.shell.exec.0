@@ -1,0 +1,71 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:35:59 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:36:04 PM [express] GET /api/settings/system 304 in 16ms
+8:36:04 PM [express] GET /api/auth/me 304 in 25ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:36:05 PM [express] GET /api/notifications 200 in 80ms
+8:36:12 PM [express] GET /api/auth/me 401 in 3ms
+8:36:12 PM [express] GET /api/settings/system 200 in 3ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:36:35 PM [express] GET /api/notifications 200 in 36ms
+8:36:50 PM [express] GET /api/settings/system 304 in 11ms
+8:36:50 PM [express] GET /api/auth/me 304 in 26ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:36:51 PM [express] GET /api/notifications 200 in 140ms
+8:36:51 PM [express] GET /api/clients 200 in 11ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:37:05 PM [express] GET /api/notifications 200 in 11ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:37:36 PM [express] GET /api/notifications 200 in 26ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:38:06 PM [express] GET /api/notifications 200 in 25ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:38:36 PM [express] GET /api/notifications 200 in 24ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:39:06 PM [express] GET /api/notifications 200 in 54ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:39:37 PM [express] GET /api/notifications 200 in 25ms
+Fetching notifications for user: [33m23[39m
+Found 0 notifications for user 23
+8:40:07 PM [express] GET /api/notifications 200 in 23ms
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[1;1H[0J[2m8:40:15 PM[22m [36m[1m[vite][22m[39m [32mhmr update [39m[2m/src/components/notifications/notification-dropdown.tsx, /src/index.css?v=nvCjKcWr4uPsMuH_BZ5Qn[22m

@@ -1,0 +1,99 @@
+Node.js v18.20.8
+root@srv773741:/var/www# # Create the production server file
+cat > server/production.ts << 'EOF'
+import express, { type Request, Response, NextFunction } from "express";
+import { registerRoutes } from "./routes.js";
+import { seedDatabase } from "./seed.js";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+async function startServer() {
+  console.log("Starting Work Order Management System...");
+  
+  // Seed database on startup
+  try {
+    await seedDatabase();
+    console.log("Database seeded successfully");
+  } catch (error) {
+    console.error("Database seed error:", error);
+  }
+
+  const app = express();
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+
+  // CORS middleware
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    next();
+  });
+
+  // Request logging
+  app.use((req, res, next) => {
+    const start = Date.now();
+    const requestPath = req.path;
+
+    res.on("finish", () => {
+      const duration = Date.now() - start;
+npx tsx server/production.tsql://workorder_admin:workorder123@localhost:5432/workorder_db}`);
+Starting Work Order Management System...
+Starting database seed...
+Users table doesn't exist yet, continuing with seed...
+Error seeding database: ErrorEvent {
+  [Symbol(kTarget)]: WebSocket {
+    _events: [Object: null prototype] {
+      error: [Function],
+      message: [Function],
+      close: [Function],
+      open: [Function]
+    },
+    _eventsCount: 4,
+    _maxListeners: undefined,
+    _binaryType: 'arraybuffer',
+    _closeCode: 1006,
+    _closeFrameReceived: false,
+    _closeFrameSent: false,
+    _closeMessage: <Buffer >,
+    _closeTimer: null,
+    _errorEmitted: true,
+    _extensions: {},
+    _paused: false,
+    _protocol: '',
+    _readyState: 3,
+    _receiver: null,
+    _sender: null,
+    _socket: null,
+    _bufferedAmount: 0,
+    _isServer: false,
+    _redirects: 0,
+    _autoPong: true,
+    _url: 'wss://localhost/v2',
+    _req: null,
+    [Symbol(kCapture)]: false
+  },
+  [Symbol(kType)]: 'error',
+  [Symbol(kError)]: Error: connect ECONNREFUSED ::1:443
+      at __node_internal_captureLargerStackTrace (node:internal/errors:496:5)
+      at __node_internal_exceptionWithHostPort (node:internal/errors:671:12)
+      at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1555:16) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '::1',
+    port: 443
+  },
+  [Symbol(kMessage)]: 'connect ECONNREFUSED ::1:443'
+}
+Database seeded successfully
+Warning: connect.session() MemoryStore is not
+designed for a production environment, as it will leak
+memory, and will not scale past a single process.
+Serving static files from: /var/www/dist/public
+✅ Work Order Management System running on http://0.0.0.0:3000
+   Environment: production
+   Database: Connected
+   Access your application at: http://your-server-ip:3000

@@ -1,0 +1,24 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+[1G[0KStarting database seed...
+Database already seeded
+8:15:23 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 19 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+8:15:30 PM [express] GET /api/auth/me 401 in 4ms
+8:15:30 PM [express] GET /api/settings/system 200 in 4ms
+8:15:32 PM [express] GET /api/settings/system 304 in 12ms
+8:15:32 PM [express] GET /api/auth/me 304 in 30ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:15:33 PM [express] GET /api/notifications 200 in 58ms
+8:15:34 PM [express] GET /api/dashboard/stats 200 in 231ms
+8:15:34 PM [express] GET /api/dashboard/activity 200 in 245ms
+Fetching notifications for user: [33m1[39m
+Found 9 notifications for user 1
+8:16:33 PM [express] GET /api/notifications 200 in 27ms
+8:16:34 PM [express] GET /api/dashboard/activity 200 in 220ms
+8:16:34 PM [express] GET /api/dashboard/stats 200 in 226ms
